@@ -60,8 +60,8 @@ minimizing loss function / error
 		
 - 用Python来完成所有计算
 	- A 预分析阶段
-			# 给每两个变量之间画一幅散点图
-			sns.pairplot(data table)
+				# 给每两个变量之间画一幅散点图
+				sns.pairplot(data table)
 
 - 建模分析过程PACE
 	- A 检查线性回归假设是不是都满足
