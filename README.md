@@ -8,6 +8,6 @@ Start at Jan 22, 2025
 End at Feb 1, 2025
 
 ## Regression Analysis
-Study notes(/regressionAnalysis.md "点击去看看我的“随堂笔记”")
+[Study notes](/regressionAnalysis.md "点击去看看我的“随堂笔记”")
 Start at Feb 1, 2025
 End at
