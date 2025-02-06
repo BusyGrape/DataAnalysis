@@ -62,8 +62,7 @@ minimizing loss function / error
 	- A 预分析阶段
 				
 			# 我搜了一下，多个帖子都说：画散点图就用seaborn库
-			import seaborn as sns	
-			
+			import seaborn as sns		
 			# 给每两个变量之间画一幅散点图
 			sns.pairplot(data)
 
