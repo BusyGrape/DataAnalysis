@@ -26,7 +26,7 @@ E 执行 Execute——根据运算结果进行分析，得到结论，并解释
 ### Logistic Regression 逻辑回归
 适合用来描述：<br>
 随着某种因素X的变化，Y的归类会改变。（影响因素X可以不止一种）<br>
-Y的归类是一种非连续的，且数量有上限的因素。<br>
+Y的归类是可以计数的，从两类到有限多类。<br>
 μ{Y|X} = Prob(Y = n|X) = p <br>
 - p，probability 当X是某个值的时候，Y属于第n种归类的可能性是多少。
 - link function 推算逻辑回归公示的方法
@@ -42,10 +42,20 @@ minimizing loss function / error
 	- Σ(ε) == 0 使用OLS法，残差和永远为零
 	- SSR，sum of squared residuals 残差平方和
 	- 在所有的直线选项里，找那条（线）让SSR值最低的
-- r，Pearson's correlation / linear correlation coefficient 线性相关系数
-在[-1,1]之间，r的绝对值越大，样本点越像一条直线；r越小，样本点越接近一团无序云状散点<br>
-r>0意味着斜率是正数，倾斜角度↗，r<0意味着斜率是负数，倾斜角度↘<br>
-r值并不能告诉我们实际斜率是什么样的<br>
-计算r要用到covariance(X,Y)协方差和XY各自的SD标准差
+- 用r计算回归线的方程式
+	- r，Pearson's correlation / linear correlation coefficient 线性相关系数	
+		- r在[-1,1]之间
+		r的绝对值越大，样本点越像一条直线；r越小，样本点越接近一团无序云状散点
+		- r>0意味着斜率是正数，倾斜角度↗
+		- r<0意味着斜率是负数，倾斜角度↘
+		- r值并不能告诉我们实际斜率是什么样的
+		- 计算r要用到covariance(X,Y)协方差和XY各自的SD标准差
+		covariance(X,Y)/(SD X)(SD Y)
+	- 有两条定律
+		- X的平均值和Y的平均值永远会落在回归线上
+		- 如果X增加1个X标准差，那么Y会增加r个Y标准差
+		回归线的斜率就是r(SD Y)/SD X
+- 用Python来完成所有计算
+- 建模过程PACE
 
 ## M3 Multiple linear regression 多元线性回归模型
