@@ -42,20 +42,37 @@ minimizing loss function / error
 	- Σ(ε) == 0 使用OLS法，残差和永远为零
 	- SSR，sum of squared residuals 残差平方和
 	- 在所有的直线选项里，找那条让SSR值最低的（线）
+	
 - 用r计算回归线方程
 	- r，Pearson's correlation / linear correlation coefficient 线性相关系数	
 		- r在[-1,1]之间
-		r的绝对值越大，样本点越像一条直线；r越小，样本点越接近一团无序云状散点
-		- r>0意味着斜率是正数，倾斜角度↗
-		- r<0意味着斜率是负数，倾斜角度↘
-		- r值并不能告诉我们实际斜率是什么样的
-		- 计算r要用到covariance(X,Y)协方差和XY各自的SD标准差
-		covariance(X,Y)/(SD X)(SD Y)
+			r的绝对值越大，样本点越像一条直线；r越小，样本点越接近一团无序云状散点
+		- r 正负的含义
+			r>0意味着斜率是正数，倾斜角度↗<br>
+			r<0意味着斜率是负数，倾斜角度↘
+		- r的数值不是斜率
+		- r = covariance(X,Y)协方差/(SD X)(SD Y)标准差
 	- 有两条定律
 		- X的平均值和Y的平均值永远会落在回归线上
 		- 如果X增加1个X标准差，那么Y会增加r个Y标准差
+		
 		回归线的斜率就是r(SD Y)/SD X
+		
 - 用Python来完成所有计算
-- 建模分析过程PACE
+	- A 预分析阶段
+			# 给每两个变量之间画一幅散点图
+			sns.pairplot(data table)
 
+- 建模分析过程PACE
+	- A 检查线性回归假设是不是都满足
+		- Linearity 两个变量XY之间是否是线性相关
+			可以先抓样本画个散点图，看看这些点的分布像不像直线
+		- Normality 残差residual是否是normal distributed正态分布
+			必须要建完模型后才能检验，可以直接画柱状图也可以画Q-Q plot图来观察判断
+		- Independent observations 采集的样本之间没有相互影响
+			主要靠分析数据采集步骤来判断，或者建模后输出结果显示有问题时能发现样本不符合假设
+		- Homoscedasticity 残差的偏移量持续且存在且数值随机但接近
+			必须要建完模型后才能检验，同样可以通过画出散点图来观察判断
+			
+			
 ## M3 Multiple linear regression 多元线性回归模型
