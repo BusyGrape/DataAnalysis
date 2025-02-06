@@ -11,13 +11,15 @@ C 建模 Construct——建模并处理数据<br>
 E 执行 Execute——根据运算结果进行分析，得到结论，并解释
 
 ### 线性回归 liner regression
-适合用来描述：一种因素Y会跟随着另一种因素X的变化而改变。他们之间的伴随关系是线性的，也就是说Y会按某种比例，随X的增加而增加（或减少）<br>
-μ{Y|X} = β0+β1X
+适合用来描述：<br>
+一种因素Y会跟随着另一种因素X的变化而改变。<br>
+他们之间的伴随关系是线性的，也就是说，Y会按某种比例，随X的增加而增加（或减少）<br>
+μ{Y|X} = β<sub>0</sub>+β<sub>1</sub>X
 - Y，Dependent variable 
 - X，Independent variable
 - Regression coefficients
-	- β1，Slope
-	- β0，Intercept
+	- β<sub>1</sub>，Slope
+	- β<sub>0</sub>，Intercept
 - OLS，ordinary least squares estimation
 	- loss functiion用公式推算出的理想Y与实际观测到的Y之间的差
 
