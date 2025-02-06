@@ -31,14 +31,21 @@ Y的归类是一种非连续的，且数量有上限的因素。<br>
 - p，probability 当X是某个值的时候，Y属于第n种归类的可能性是多少。
 - link function 推算逻辑回归公示的方法
 
-### Correlation is not Causation 两种因素相关，并不等于谁能引发谁。这不是一种因果关系。
+### Correlation is not Causation 
+两种因素相关，并不等于谁能引发谁。这不是一种因果关系。
 
 ## M2 Simple linear regression 一元线性回归模型
-在一个二维坐标系里，每对相关因素XY的关系能折射出一个点。找出一条直线（的方程），最能表示这些点的分布趋势。<br>
+在一个二维坐标系里，每对相关因素X和Y的关系能折射成一个点。找出一条直线（的方程），最能表示这些点的分布趋势。
 - OLS 最小误差法
-	- loss function/ error
+minimizing loss function / error
 	- ε，Residual 残差，Y观测值 与 Y的推测值 之间的差异
 	- Σ(ε) == 0 使用OLS法，残差和永远为零
 	- SSR，sum of squared residuals 残差平方和
+	- 在所有的直线选项里，找那条（线）让SSR值最低的
+- r，Pearson's correlation / linear correlation coefficient 线性相关系数
+在[-1,1]之间，r的绝对值越大，样本点越像一条直线；r越小，样本点越接近一团无序云状散点<br>
+r>0意味着斜率是正数，倾斜角度↗，r<0意味着斜率是负数，倾斜角度↘<br>
+r值并不能告诉我们实际斜率是什么样的<br>
+计算r要用到covariance(X,Y)协方差和XY各自的SD标准差
 
 ## M3 Multiple linear regression 多元线性回归模型
