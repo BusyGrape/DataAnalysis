@@ -107,9 +107,20 @@ Y的归类是可以计数的，从两类到有限多类。
 				residuals = model.resid
 		
 		- Step 2 Model evaluation
-			- confidence band
+			
+			了解summary给出的各个指标都是什么意思
+			
+			- confidence band				
 				在回归线附近，落在置信区间里所有的直线组成的一片区域<br>
 				用样本进行回归分析，总是可能与整体的回归分析结果存在偏差
+			
+			- P-value（还要再想想怎么总结这一块）				
+				推翻null hypothese假设的情况出现的概率<br>
+				如果P小于置信假设5%
+				
+			- Confidence Intervals [0.025, 0.975]			
+				表示有5%的机会，斜率和截距的置信范围值不能包含回归线的真实参数<br>
+				在这一列下面给出来的数据是截距和斜率的范围，用来画出cofidence band区域
 			
 	- E 对建模进行全面评估
 	
