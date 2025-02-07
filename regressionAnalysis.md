@@ -85,8 +85,34 @@ Y的归类是可以计数的，从两类到有限多类。
 			# 画两两散点图就用seaborn库
 			import seaborn as sns		
 			# 给每两个变量之间画一幅散点图
-			sns.pairplot(data)
+			sns.pairplot(origData)
 
+	- C 建模
+		- Step1 Build a model
+	
+			# Subset Data 清洗并选择要进行回归分析的两列数据
+			ols_data = origData[["column1/X", "column2/Y"]]
+			# Write out formula 定义Y和X分别是哪列数据
+			ols_formula = "column2/Y ~ column1/X"
+			# Import ols function
+			from statsmodels.formula.api import ols
+			# Build OLS, fit model to data 用OLS方法建模计算出回归线
+			OLS = ols(formula = ols_formula, data = ols_data)
+			model = OLS.fit()
+			# print模型的各项统计指标
+			model.summary()
+			# Predictions 预测
+			predictions = model.predict(dataList[["Independent Variable/X"]])
+			# Residuals 获得残差，可以后续进行假设检验
+			residuals = model.resid
+		
+		- Step 2 Model evaluation
+			- confidence band
+				在回归线附近，落在置信区间里所有的直线组成的一片区域<br>
+				用样本进行回归分析，总是可能与整体的回归分析结果存在偏差
+			
+	- E 对建模进行全面评估
+	
 - 建模分析过程PACE
 	- A 检查线性回归假设是不是都满足
 		- Linearity 两个变量XY之间是否是线性相关
@@ -104,5 +130,6 @@ Y的归类是可以计数的，从两类到有限多类。
 
 			必须要建完模型后才能检验，同样可以通过画出散点图来观察判断
 			
-			
+	- C 用适合的变量建模，得到各项统计数据
+	
 ## M3 Multiple linear regression 多元线性回归模型
