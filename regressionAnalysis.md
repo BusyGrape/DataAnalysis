@@ -125,6 +125,14 @@ Y的归类是可以计数的，从两类到有限多类。
 				表示有5%的机会，斜率和截距的置信范围值不能包含回归线的真实参数<br>
 				在这一列下面给出来的数据是截距和斜率的范围，用来画出cofidence band区域
 			
+			常见的评估矩阵
+			- R<up>2</up> 线性相关系数r的平方
+			- MSE，mean squared error
+			- MAE，mean absolute error
+			- Hold-out sample 
+				
+				不能是之前建模fit model时使用过的数据
+				
 	- E 对建模进行全面评估
 	
 - 建模分析过程PACE
