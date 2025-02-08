@@ -45,164 +45,165 @@ Y的归类是可以计数的，从两类到有限多类。
 
 ## M2 Simple linear regression 一元线性回归模型
 
+Y的变化只受一个因素X影响。<br>
 在一个二维坐标系里，每对相关因素X和Y的关系能折射成一个点。找出一条直线（的方程），最能表示这些点的分布趋势。
 
-- OLS 最小误差法推算回归方程
+### OLS 最小误差法推算回归方程
 
-	minimizing loss function / error
+minimizing loss function / error
 
-	- ε，Residual 残差，Y观测值 与 Y的推测值 之间的差异
+- ε，Residual 残差，Y观测值 与 Y的推测值 之间的差异
+
+	Σ(ε) == 0 使用OLS法，残差和永远为零
+
+- SSR，sum of squared residuals 残差平方和
+- 在所有的直线选项里，找那条让SSR值最低的（线）
 	
-		Σ(ε) == 0 使用OLS法，残差和永远为零
+### 用r计算回归线方程
+- r，Pearson's correlation / linear correlation coefficient 线性相关系数	
+	- r在[-1,1]之间
+
+		r的绝对值越大，样本点越像一条直线；r越小，样本点越接近一团无序云状散点
+
+	- r 正负的含义
+
+		r>0意味着斜率是正数，倾斜角度↗<br>
+		r<0意味着斜率是负数，倾斜角度↘
+
+	- r的数值不是斜率
+	- r = covariance(X,Y)协方差/(SD X)(SD Y)标准差
 	
-	- SSR，sum of squared residuals 残差平方和
-	- 在所有的直线选项里，找那条让SSR值最低的（线）
+- 有两条定律
+	- X的平均值和Y的平均值永远会落在回归线上
+	- 如果X增加1个X标准差，那么Y会增加r个Y标准差
 	
-- 用r计算回归线方程
-	- r，Pearson's correlation / linear correlation coefficient 线性相关系数	
-		- r在[-1,1]之间
-
-			r的绝对值越大，样本点越像一条直线；r越小，样本点越接近一团无序云状散点
-
-		- r 正负的含义
-
-			r>0意味着斜率是正数，倾斜角度↗<br>
-			r<0意味着斜率是负数，倾斜角度↘
-
-		- r的数值不是斜率
-		- r = covariance(X,Y)协方差/(SD X)(SD Y)标准差
+- 回归线的斜率β<sub>1</sub> = r(SD Y)/SD X
 		
-	- 有两条定律
-		- X的平均值和Y的平均值永远会落在回归线上
-		- 如果X增加1个X标准差，那么Y会增加r个Y标准差
-		
-		回归线的斜率就是r(SD Y)/SD X
-		
-- 用Python来完成所有计算
-	- A 预分析阶段
-				
-			# 我搜了一下，多个帖子都说
-			# 画两两散点图就用seaborn库
-			import seaborn as sns		
-			# 给每两个变量之间画一幅散点图
-			sns.pairplot(origData)
+### 用Python来完成所有计算
+- A 预分析阶段，观察两两散点图矩阵
+			
+		# 我搜了一下，多个帖子都说
+		# 画两两散点图就用seaborn库
+		import seaborn as sns		
+		# 给每两个变量之间画一幅散点图
+		sns.pairplot(origData)
 
-	- C 建模
-		- Step1 Build a model
+- C 建模
+	- Step1 Build a model
+
+			# Subset Data 清洗并选择要进行回归分析的两列数据
+			ols_data = origData[["column1/X", "column2/Y"]]
+			# Write out formula 定义Y和X分别是哪列数据
+			ols_formula = "column2/Y ~ column1/X"
+			# Import ols function
+			from statsmodels.formula.api import ols
+			# Build OLS, fit model to data 用OLS方法建模计算出回归线
+			OLS = ols(formula = ols_formula, data = ols_data)
+			model = OLS.fit()
 	
-				# Subset Data 清洗并选择要进行回归分析的两列数据
-				ols_data = origData[["column1/X", "column2/Y"]]
-				# Write out formula 定义Y和X分别是哪列数据
-				ols_formula = "column2/Y ~ column1/X"
-				# Import ols function
-				from statsmodels.formula.api import ols
-				# Build OLS, fit model to data 用OLS方法建模计算出回归线
-				OLS = ols(formula = ols_formula, data = ols_data)
-				model = OLS.fit()
+	- Step 2 Model evaluation
+
+		P-value，Confidence Intervals
+
+			# print statistics 输出模型的各项统计指标
+			model.summary()
+
+			# confidence band 
 		
-		- Step 2 Model evaluation
 
-			P-value，Confidence Intervals
-
-				# print模型的各项统计指标
-				model.summary()
-
-				# confidence band 
+			# Residuals 获得残差，可以后续进行假设检验
+			residuals = model.resid
+			# normality Q-Q plot图			
 			
+			# Homoscedasticity
+
+		R<up>2</up>，MSE/MAE			
+
+			# Predictions 预测
+			predictions = model.predict(dataList[["Independent Variable/X"]])
+		
+		
+- E 对建模进行全面评估和解释
 	
-				# Residuals 获得残差，可以后续进行假设检验
-				residuals = model.resid
-				# normality Q-Q plot图			
-				
-				# Homoscedasticity
-
-			R<up>2</up>，MSE/MAE			
-
-				# Predictions 预测
-				predictions = model.predict(dataList[["Independent Variable/X"]])
-			
-			
-	- E 对建模进行全面评估和解释
+	Data visolization
 		
-		Data visolization
-		
-- 建模分析过程PACE
-	- A 检查线性回归假设是不是都满足
-		- Linearity 两个变量XY之间是否是线性相关
+### 建模分析过程PACE
+- A 检查线性回归假设是不是都满足
+	- Linearity 两个变量XY之间是否是线性相关
 
-			可以先抓样本画个散点图，看看这些点的分布像不像直线
-		
-		- Normality 残差residual是否是normal distributed正态分布
-
-			必须要建完模型后才能检验，可以直接画柱状图也可以画Q-Q plot图来观察判断
-
-		- Independent observations 采集的样本之间没有相互影响
-			主要靠分析数据采集步骤来判断，或者建模后输出结果显示有问题时能发现样本不符合假设
-		
-		- Homoscedasticity 残差的偏移量持续且存在且数值随机但接近
-
-			必须要建完模型后才能检验，同样可以通过画出散点图来观察判断
-			
-	- C 用适合的变量建模，得到各项统计数据
-		- 建模和评估模型
-			
-			了解summary给出的各个指标都是什么意思
-			- confidence band
-			
-				在回归线附近，落在置信区间里所有的直线组成的一片区域<br>
-				用样本进行回归分析，总是可能与整体的回归分析结果存在偏差
-			
-			- P-value			
-			
-				null hypothesis（XY不存在线性相关性）成立的可能性（概率）<br>
-				如果P小于置信度（5%），null hypothesis被推翻<br>
-				可以认为XY之间线性相关，coefficient不是0
-				
-			- Confidence Intervals [0.025, 0.975]
-			
-				表示有5%的机会，斜率和截距的置信范围值不能包含回归线的真实参数<br>
-				在这一列下面给出来的数据是截距和斜率的范围，用来画出cofidence band区域
-			
-			常见的评估矩阵
-			- R<up>2</up> 决定系数 0~1之间
-				
-				用来描述X对Y的影响程度。越接近于1说明越适合用线性回归分析。
-				线性相关系数r的平方(有待验证，计算公式不一样)
-				
-			- MSE，mean squared error
-				
-				对outlier敏感，值越小越好
-				
-			- MAE，mean absolute error 
-				
-				在有outlier时使用，值越小越好 
-				
-			- Hold-out sample 
-				
-				不能是之前建模fit model时使用过的数据，可以用这组数据检测以上三个值
-				
-	- E 对建模结果进行全面评估和解释
-		- 解释模型的统计指标都意味着什么，比如斜率表明的Y将如何因为X而变化
-		- 尽量将数字转化成易于理解的图像、动画等来进行讲解或演示
-		- 有必要提醒听众模型仍可能在什么情况下失效，或需要进行修正
-		- 但要尽量避免使用晦涩的术语，如coefficients or P-value 
-		- 要注意区分correlation和causation的区别，我们几乎无法在这里证明causaiton
+		可以先抓样本画个散点图，看看这些点的分布像不像直线
 	
+	- Normality 残差residual是否是normal distributed正态分布
+
+		必须要建完模型后才能检验，可以直接画柱状图也可以画Q-Q plot图来观察判断
+
+	- Independent observations 采集的样本之间没有相互影响
+		主要靠分析数据采集步骤来判断，或者建模后输出结果显示有问题时能发现样本不符合假设
+	
+	- Homoscedasticity 残差的偏移量持续且存在且数值随机但接近
+
+		必须要建完模型后才能检验，同样可以通过画出散点图来观察判断
+		
+- C 用适合的变量建模，得到各项统计数据
+	- 建模和评估模型
+		
+		了解summary给出的各个指标都是什么意思
+		- confidence band
+		
+			在回归线附近，落在置信区间里所有的直线组成的一片区域<br>
+			用样本进行回归分析，总是可能与整体的回归分析结果存在偏差
+		
+		- P-value			
+		
+			null hypothesis（XY不存在线性相关性）成立的可能性（概率）<br>
+			如果P小于置信度（5%），null hypothesis被推翻<br>
+			可以认为XY之间线性相关，coefficient不是0
+			
+		- Confidence Intervals [0.025, 0.975]
+		
+			表示有5%的机会，斜率和截距的置信范围值不能包含回归线的真实参数<br>
+			在这一列下面给出来的数据是截距和斜率的范围，用来画出cofidence band区域
+		
+		常见的评估矩阵
+		- R<up>2</up> 决定系数 0~1之间
+			
+			用来描述X对Y的影响程度。越接近于1说明越适合用线性回归分析。
+			线性相关系数r的平方(有待验证，计算公式不一样)
+			
+		- MSE，mean squared error
+			
+			对outlier敏感，值越小越好
+			
+		- MAE，mean absolute error 
+			
+			在有outlier时使用，值越小越好 
+			
+		- Hold-out sample 
+			
+			不能是之前建模fit model时使用过的数据，可以用这组数据检测以上三个值
+			
+- E 对建模结果进行全面评估和解释
+	- 解释模型的统计指标都意味着什么，比如斜率表明的Y将如何因为X而变化
+	- 尽量将数字转化成易于理解的图像、动画等来进行讲解或演示
+	- 有必要提醒听众模型仍可能在什么情况下失效，或需要进行修正
+	- 但要尽量避免使用晦涩的术语，如coefficients or P-value 
+	- 要注意区分correlation和causation的区别，我们几乎无法在这里证明causaiton
+
 ## M3 Multiple linear regression 多元线性回归模型
 
 当不止一个因素共同影响Y时，引入多元线性回归模型<br>
 Y = β<sub>0</sub>+β<sub>1</sub>X<sub>1</sub>+...+β<sub>n</sub>X<sub>n</sub>
 
-- One hot encoding 独热编码
+### One hot encoding 独热编码
 
-	如果影响因素X<sub>i</sub>是分类变量。类似多选题的答案，如：做或者不做，选择了AC没有选BDE。<br>
-	这时为了可以进行回归分析，要把X<sub>i</sub>拆解成一组二进制数来表示它的全部特征<br>
-	X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
-	二进制的位数和X有几个特征有关
+如果影响因素X<sub>i</sub>是分类变量。类似多选题的答案，如：做或者不做，选择了AC没有选BDE。<br>
+这时为了可以进行回归分析，要把X<sub>i</sub>拆解成一组二进制数来表示它的全部特征<br>
+X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
+二进制的位数和X有几个特征有关
 
-- interaction
+### interaction
 
-- 建模分析过程PACE
+### 建模分析过程PACE
 	- A 检查线性回归假设是不是都满足
 		- Linearity 
 			
