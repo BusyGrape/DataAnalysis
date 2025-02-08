@@ -60,7 +60,9 @@ minimizing loss function / error
 - 在所有的直线选项里，找那条让SSR值最低的（线）
 	
 ### 用r计算回归线方程
+
 - r，Pearson's correlation / linear correlation coefficient 线性相关系数	
+
 	- r在[-1,1]之间
 
 		r的绝对值越大，样本点越像一条直线；r越小，样本点越接近一团无序云状散点
@@ -80,7 +82,9 @@ minimizing loss function / error
 - 回归线的斜率β<sub>1</sub> = r(SD Y)/SD X
 		
 ### 用Python来完成所有计算
+
 - A 预分析阶段
+
 	-观察两两散点图矩阵
 			
 			# 我搜了一下，多个帖子都说
@@ -90,6 +94,7 @@ minimizing loss function / error
 			sns.pairplot(origData)
 
 - C 建模
+
 	- Step1 Build a model
 
 			# Subset Data 清洗并选择要进行回归分析的两列数据
