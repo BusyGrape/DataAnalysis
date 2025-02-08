@@ -60,7 +60,6 @@ minimizing loss function / error
 - 在所有的直线选项里，找那条让SSR值最低的（线）
 	
 ### 用r计算回归线方程
-
 - r，Pearson's correlation / linear correlation coefficient 线性相关系数	
 
 	- r在[-1,1]之间
@@ -82,9 +81,7 @@ minimizing loss function / error
 - 回归线的斜率β<sub>1</sub> = r(SD Y)/SD X
 		
 ### 用Python来完成所有计算
-
 - A 预分析阶段
-
 	- 观察两两散点图矩阵
 			
 			# 我搜了一下，多个帖子都说
@@ -94,7 +91,6 @@ minimizing loss function / error
 			sns.pairplot(origData)
 
 - C 建模
-
 	- Step1 Build a model
 
 			# Subset Data 清洗并选择要进行回归分析的两列数据
@@ -115,18 +111,38 @@ minimizing loss function / error
 			model.summary()
 
 			# confidence band 
-		
-
-			# Residuals 获得残差，可以后续进行假设检验
-			residuals = model.resid
-			# normality Q-Q plot图			
+			sns.regplot(x="X variable name", y="Y variable name", data = ols_data)
 			
-			# Homoscedasticity
+			# X，取X值
+			X = ols_data["X variable name"]
+			# Y，用预测公式Predict获得Y值fitted_values
+			fitted_values = model.predict(X)
+			# Residuals，用riesid公式获得残差值
+			residuals = model.resid
 
+		Homoscedasticity
+
+			# Residuals在0附近的偏移量散点图
+			import matplotlib.pyplot as plt
+			fig = sns.scatterplot(x=fitted_values, y=residuals)
+			fig.axhline(0)
+			fig.set_xlabel("Fitted Values")
+			fig.set_ylabel("Residuals")
+			plt.show()
+
+		normality
+
+			# Residuals的柱状图
+			fig = sns.histplot(residuals)
+			fig.set_xlabel("Residual Value")
+			fig.set_title("Histogram of Residuals")
+			plt.show()
+			# Q-Q plot图	
+			import statsmodels.api as sm
+			fig = sm.qqplot(model.resid, line = 's')
+			plt.show()			
+			
 		R<up>2</up>，MSE/MAE			
-
-			# Predictions 预测
-			predictions = model.predict(dataList[["Independent Variable/X"]])
 		
 		
 - E 对建模进行全面评估和解释
@@ -198,7 +214,8 @@ minimizing loss function / error
 
 ## M3 Multiple linear regression 多元线性回归模型
 
-当不止一个因素共同影响Y时，引入多元线性回归模型<br>
+当不止一个因素共同影响Y时，引入多元线性回归模型
+
 Y = β<sub>0</sub>+β<sub>1</sub>X<sub>1</sub>+...+β<sub>n</sub>X<sub>n</sub>
 
 ### One hot encoding 独热编码
