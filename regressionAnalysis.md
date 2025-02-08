@@ -101,15 +101,19 @@ Y的归类是可以计数的，从两类到有限多类。
 				model = OLS.fit()
 				# print模型的各项统计指标
 				model.summary()
-				# Predictions 预测
-				predictions = model.predict(dataList[["Independent Variable/X"]])
-				# Residuals 获得残差，可以后续进行假设检验
-				residuals = model.resid
 		
 		- Step 2 Model evaluation
+				# Residuals 获得残差，可以后续进行假设检验
+				residuals = model.resid
+
 			- 检验 normality Q-Q plot图
 			
 			- 检验 Homoscedasticity
+
+				# Predictions 预测
+				predictions = model.predict(dataList[["Independent Variable/X"]])
+			
+			- 检验 R<up>2</up>，MSE/MAE			
 			
 	- E 对建模进行全面评估和解释
 		
