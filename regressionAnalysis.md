@@ -80,13 +80,14 @@ minimizing loss function / error
 - 回归线的斜率β<sub>1</sub> = r(SD Y)/SD X
 		
 ### 用Python来完成所有计算
-- A 预分析阶段，观察两两散点图矩阵
+- A 预分析阶段
+	-观察两两散点图矩阵
 			
-		# 我搜了一下，多个帖子都说
-		# 画两两散点图就用seaborn库
-		import seaborn as sns		
-		# 给每两个变量之间画一幅散点图
-		sns.pairplot(origData)
+			# 我搜了一下，多个帖子都说
+			# 画两两散点图就用seaborn库
+			import seaborn as sns		
+			# 给每两个变量之间画一幅散点图
+			sns.pairplot(origData)
 
 - C 建模
 	- Step1 Build a model
@@ -128,6 +129,7 @@ minimizing loss function / error
 	Data visolization
 		
 ### 建模分析过程PACE
+
 - A 检查线性回归假设是不是都满足
 	- Linearity 两个变量XY之间是否是线性相关
 
@@ -204,18 +206,18 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 ### interaction
 
 ### 建模分析过程PACE
-	- A 检查线性回归假设是不是都满足
-		- Linearity 
-			
-			看每一个X<sub>i</sub>和Y的散点图是不是像一条线
-			
-		- Independance, Normality, Homoscedasticity
-			
-			定义和检测都和一元线性回归假设一样
-			
-		- No multicollinerity assumption 自变量之间没有线性关系假设
+- A 检查线性回归假设是不是都满足
+	- Linearity 
 		
-			还是通过所有变量之间的两两散点图来判断<br>
-			如果散点图不好判断，可以计算两个变量之间的VIF值（1~∞）。VIF越大线性关系越强。<br>
-			避免同时挑选上两个明显有线性关系的变量作为X<sub>i</sub>&X<sub>j</sub>，或是将两个有很强线性关系的变量转化成一个新的变量。
+		看每一个X<sub>i</sub>和Y的散点图是不是像一条线
+		
+	- Independance, Normality, Homoscedasticity
+		
+		定义和检测都和一元线性回归假设一样
+		
+	- No multicollinerity assumption 自变量之间没有线性关系假设
+	
+		还是通过所有变量之间的两两散点图来判断<br>
+		如果散点图不好判断，可以计算两个变量之间的VIF值（1~∞）。VIF越大线性关系越强。<br>
+		避免同时挑选上两个明显有线性关系的变量作为X<sub>i</sub>&X<sub>j</sub>，或是将两个有很强线性关系的变量转化成一个新的变量。
 			
