@@ -99,20 +99,28 @@ Y的归类是可以计数的，从两类到有限多类。
 				# Build OLS, fit model to data 用OLS方法建模计算出回归线
 				OLS = ols(formula = ols_formula, data = ols_data)
 				model = OLS.fit()
-				# print模型的各项统计指标
-				model.summary()
 		
 		- Step 2 Model evaluation
 
+			P-value，Confidence Intervals
+
+				# print模型的各项统计指标
+				model.summary()
+
+				# confidence band 
+			
+	
 				# Residuals 获得残差，可以后续进行假设检验
 				residuals = model.resid
-				- 检验 normality Q-Q plot图			
-				- 检验 Homoscedasticity
+				# normality Q-Q plot图			
+				
+				# Homoscedasticity
 
+			R<up>2</up>，MSE/MAE			
 
 				# Predictions 预测
 				predictions = model.predict(dataList[["Independent Variable/X"]])
-				- 检验 R<up>2</up>，MSE/MAE			
+			
 			
 	- E 对建模进行全面评估和解释
 		
