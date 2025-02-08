@@ -85,7 +85,7 @@ minimizing loss function / error
 
 - A 预分析阶段
 
-	-观察两两散点图矩阵
+	- 观察两两散点图矩阵
 			
 			# 我搜了一下，多个帖子都说
 			# 画两两散点图就用seaborn库
