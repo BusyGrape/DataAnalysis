@@ -93,7 +93,7 @@ minimizing loss function / error
 - C 建模
 	- Step1 Build a model
 
-			'''python
+			\\\python
 			# Subset Data 清洗并选择要进行回归分析的两列数据
 			ols_data = origData[["column1/X", "column2/Y"]]
 			# Write out formula 定义Y和X分别是哪列数据
@@ -102,7 +102,8 @@ minimizing loss function / error
 			from statsmodels.formula.api import ols
 			# Build OLS, fit model to data 用OLS方法建模计算出回归线
 			OLS = ols(formula = ols_formula, data = ols_data)
-			model = OLS.fit()'''
+			model = OLS.fit()
+			\\\
 	
 	- Step 2 Model evaluation
 
