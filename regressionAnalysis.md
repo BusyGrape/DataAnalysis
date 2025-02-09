@@ -94,17 +94,19 @@ minimizing loss function / error
 	- Step1 Build a model
 			
 			
-			```
-			# Subset Data 清洗并选择要进行回归分析的两列数据
-			ols_data = origData[["column1/X", "column2/Y"]]
-			# Write out formula 定义Y和X分别是哪列数据
-			ols_formula = "column2/Y ~ column1/X"
-			# Import ols function
-			from statsmodels.formula.api import ols
-			# Build OLS, fit model to data 用OLS方法建模计算出回归线
-			OLS = ols(formula = ols_formula, data = ols_data)
-			model = OLS.fit()
-			```
+		```python
+		
+		# Subset Data 清洗并选择要进行回归分析的两列数据
+		ols_data = origData[["column1/X", "column2/Y"]]
+		# Write out formula 定义Y和X分别是哪列数据
+		ols_formula = "column2/Y ~ column1/X"
+		# Import ols function
+		from statsmodels.formula.api import ols
+		# Build OLS, fit model to data 用OLS方法建模计算出回归线
+		OLS = ols(formula = ols_formula, data = ols_data)
+		model = OLS.fit()
+		
+		```
 			
 				
 	- Step 2 Model evaluation
