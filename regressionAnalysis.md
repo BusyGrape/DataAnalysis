@@ -162,12 +162,9 @@ minimizing loss function / error
 		MAE = mean_absolute_error(y_test,y_test_pred)
 		R2 = r2_score(y_test,y_test_pred)
 		print('MSE:',MSE,'/nMAE:',MAE,'/nR2:',R2)
-		```
+		```		
 		
-		
-- E 对建模进行全面评估和解释
-	
-	Data visolization
+- E 可以用python来完成Data visualisation工作
 		
 ### 建模分析过程PACE
 
@@ -188,7 +185,8 @@ minimizing loss function / error
 		必须要建完模型后才能检验，同样可以通过画出散点图来观察判断
 		
 - C 用适合的变量建模，得到各项统计数据
-	- 建模和评估模型
+	- 建模（参见：用Python来完成所有计算/C 建模）
+	- 评估
 		
 		了解summary给出的各个指标都是什么意思
 		- confidence band
@@ -320,12 +318,15 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 
 	R<sup>2</sup>会随着样本数量增加而自然趋近于1，Ajusted R<sup>2</sup>去除了样本数量和特征（自变量）数量对评分的影响，所以更好用。
 
-- forward selection & backward elimiation
+- 常见筛选方法
+	- forward selection & backward elimiation
 	
-	forward是从第一个可能的特征/因素/自变量开始，一个一个判断是否要包含<br>
-	backward是先包含所有可能的特征，再从最后一个开始判断是不是要剔除
+		forward是从第一个可能的特征/因素/自变量开始，一个一个判断是否要包含<br>
+		backward是先包含所有可能的特征，再从最后一个开始判断是不是要剔除
 
-- Extra-sum-of-squares F-test
+	- based on Extra-sum-of-squares F-test
+		
+		based on p-value
 
 - Regularization
 
