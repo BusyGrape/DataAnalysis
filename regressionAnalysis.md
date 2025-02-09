@@ -93,6 +93,7 @@ minimizing loss function / error
 - C 建模
 	- Step1 Build a model
 
+			'''python
 			# Subset Data 清洗并选择要进行回归分析的两列数据
 			ols_data = origData[["column1/X", "column2/Y"]]
 			# Write out formula 定义Y和X分别是哪列数据
@@ -101,7 +102,7 @@ minimizing loss function / error
 			from statsmodels.formula.api import ols
 			# Build OLS, fit model to data 用OLS方法建模计算出回归线
 			OLS = ols(formula = ols_formula, data = ols_data)
-			model = OLS.fit()
+			model = OLS.fit()'''
 	
 	- Step 2 Model evaluation
 
@@ -188,7 +189,7 @@ minimizing loss function / error
 			在这一列下面给出来的数据是截距和斜率的范围，用来画出cofidence band区域
 		
 		常见的评估矩阵
-		- R<up>2</up> 决定系数 0~1之间
+		- R<sup>2</sup> 决定系数 0~1之间
 			
 			用来描述X对Y的影响程度。越接近于1说明越适合用线性回归分析。
 			线性相关系数r的平方(有待验证，计算公式不一样)
@@ -239,7 +240,9 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 		
 	- No multicollinerity assumption 自变量之间没有线性关系假设
 	
-		通过所有变量之间的两两散点图来判断sns.pairplot()<br>
+		通过所有变量之间的两两散点图来判断
+
+			sns.pairplot()
 		如果散点图不好判断，可以计算两个变量之间的VIF值（1~∞）。VIF越大线性关系越强。
 		
 			from statsmodels.stats.outliers_influence import variance_inflation_factor
@@ -248,8 +251,8 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 			vif = zip(X, vif)
 			print(list(vif))
 			
-	避免同时挑选上两个明显有线性关系的变量作为X<sub>i</sub>&X<sub>j</sub>，或是将两个有很强线性关系的变量转化成一个新的变量。
-		
+		避免同时挑选上两个明显有线性关系的变量作为X<sub>i</sub>&X<sub>j</sub>，或是将两个有很强线性关系的变量转化成一个新的变量。
+			
 		借助其他回归方法分析：Ridge regression，Lasso regression，Principal component analysis (PCA)
 		
 - C 建模
@@ -276,7 +279,7 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 ### variable selection
 - underfitting和overfitting
 	
-	R<up>2</up>太低或太低或太高<br>
+	R<sup>2</sup>太低或太低或太高<br>
 	太低等于回归模型没有抓住样本的特征<br>
 	太高则太贴合样本的特征而无法延展出整体的特征，不能很好地预测未知数据组
 	
