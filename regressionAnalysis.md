@@ -241,7 +241,7 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 什么时候加入交互项？不论影响因素是分类变量还是连续数值变量都可以引入交互项么？如何解读交互项？
 最后找了一篇知乎文章算是基本看明白了，配合评论区就更全面的回答了我的疑问。
 
-[一文轻松看懂交互作用](https://zhuanlan.zhihu.com/p/224990519)
+[一文轻松看懂交互作用](https://zhuanlan.zhihu.com/p/224990519 "")
 
 ### 多元线性回归假设
 - Linearity 
