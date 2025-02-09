@@ -116,10 +116,10 @@ minimizing loss function / error
 		model.summary()
 
 		# confidence band 
-		sns.regplot(x="X variable name", y="Y variable name", data = ols_data)
+		sns.regplot(x="column1/X", y="column2/Y", data = ols_data)
 		
 		# X，取X值
-		X = ols_data["X variable name"]
+		X = ols_data["column1/X"]
 		# Y，用预测公式Predict获得Y值fitted_values
 		fitted_values = model.predict(X)
 		# Residuals，用resid公式获得残差值
@@ -237,6 +237,12 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 
 ### interaction 交互项/交叉变量
 
+这个概念我觉得本课说的不很清楚，看完后我还有好几个疑问<br>
+什么时候加入交互项？不论影响因素是分类变量还是连续数值变量都可以引入交互项么？如何解读交互项？
+最后找了一篇知乎文章算是基本看明白了，配合评论区就更全面的回答了我的疑问。
+
+[一文轻松看懂交互作用]https://zhuanlan.zhihu.com/p/224990519
+
 ### 建模分析过程PACE
 - A 检查线性回归假设是不是都满足
 	- Linearity 
@@ -271,8 +277,8 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 
 	```python
 	# 准备数据
-	X = origData[["X1","X2",...,"Xn"]]
-	Y = origData[["Y virable"]]
+	X = origData[["col_1/X1","col_2/X2",...,"col_n/Xn"]]
+	Y = origData[["col_0/Y"]]
 	# 导入库
 	from sklearn.model_selection import train_test_split
 	# 把数据分成建模和测试两部分
@@ -280,7 +286,7 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	# 准备建模用api
 	ols_data = pd.concat([X_train, y_train], axis = 1)
 	# Write out formula 定义Y和X分别是哪列数据
-	ols_formula = "column2/Y ~ column1/X<sub>1</sub> + C(categorical X<sub>2</sub>)+...+X<sub>n</sub>"
+	ols_formula = "col_0/Y ~ col_1/X1 + C(col_2/categorical X2)+...+col_n/Xn"
 	# Import ols function
 	from statsmodels.formula.api import ols
 	# Build OLS, fit model to data 用OLS方法建模计算出回归线
@@ -291,6 +297,9 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 - E 解释
 
 ### variable selection
+
+选择包含什么参数/影响因素到回归模型里
+
 - underfitting和overfitting
 	
 	R<sup>2</sup>太低或太低或太高<br>
@@ -298,3 +307,13 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	太高则太贴合样本的特征而无法延展出整体的特征，不能很好地预测未知数据组
 	
 - adjusted R-squared value
+
+- forward selection
+
+- backward elimiation
+
+- Extra-sum-of-squares F-test
+
+- Regularization
+
+## M4 
