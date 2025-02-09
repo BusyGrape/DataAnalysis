@@ -235,70 +235,70 @@ Y = β<sub>0</sub>+β<sub>1</sub>X<sub>1</sub>+...+β<sub>n</sub>X<sub>n</sub>
 X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 二进制的位数和X有几个特征有关
 
-### interaction 交互项/交叉变量
+### Interaction 交互项/交叉变量
 
 这个概念我觉得本课说的不很清楚，看完后我还有好几个疑问<br>
 什么时候加入交互项？不论影响因素是分类变量还是连续数值变量都可以引入交互项么？如何解读交互项？
 最后找了一篇知乎文章算是基本看明白了，配合评论区就更全面的回答了我的疑问。
 
-[一文轻松看懂交互作用]https://zhuanlan.zhihu.com/p/224990519
+[一文轻松看懂交互作用](https://zhuanlan.zhihu.com/p/224990519)
 
-### 建模分析过程PACE
-- A 检查线性回归假设是不是都满足
-	- Linearity 
-		
-		看每一个X<sub>i</sub>和Y的散点图是不是像一条线
-		
-	- Independance, Normality, Homoscedasticity
-		
-		定义和检测都和一元线性回归假设一样
-		
-	- No multicollinerity assumption 自变量之间没有线性关系假设
+### 多元线性回归假设
+- Linearity 
 	
-		通过所有变量之间的两两散点图来判断
+	看每一个X<sub>i</sub>和Y的散点图是不是像一条线
+	
+- Independance, Normality, Homoscedasticity
+	
+	定义和检测都和一元线性回归假设一样
+	
+- No multicollinerity assumption 自变量之间没有线性关系假设
 
-		```python
-		sns.pairplot()
-		```
-		如果散点图不好判断，可以计算两个变量之间的VIF值（1~∞）。VIF越大线性关系越强。
-		
-		```python
-		from statsmodels.stats.outliers_influence import variance_inflation_factor
-		X = df[['col_1', 'col_2', 'col_3']]
-		vif = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
-		vif = zip(X, vif)
-		print(list(vif))
-		```
-		避免同时挑选上两个明显有线性关系的变量作为X<sub>i</sub>&X<sub>j</sub>，或是将两个有很强线性关系的变量转化成一个新的变量。
-			
-		借助其他回归方法分析：Ridge regression，Lasso regression，Principal component analysis (PCA)
-		
-- C 建模
+	通过所有变量之间的两两散点图来判断
 
 	```python
-	# 准备数据
-	X = origData[["col_1/X1","col_2/X2",...,"col_n/Xn"]]
-	Y = origData[["col_0/Y"]]
-	# 导入库
-	from sklearn.model_selection import train_test_split
-	# 把数据分成建模和测试两部分
-	X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.3, random_state = 42]
-	# 准备建模用api
-	ols_data = pd.concat([X_train, y_train], axis = 1)
-	# Write out formula 定义Y和X分别是哪列数据
-	ols_formula = "col_0/Y ~ col_1/X1 + C(col_2/categorical X2)+...+col_n/Xn"
-	# Import ols function
-	from statsmodels.formula.api import ols
-	# Build OLS, fit model to data 用OLS方法建模计算出回归线
-	OLS = ols(formula = ols_formula, data = ols_data)
-	model = OLS.fit()	
+	sns.pairplot()
 	```
+	如果散点图不好判断，可以计算两个变量之间的VIF值（1~∞）。VIF越大线性关系越强。
+	
+	```python
+	from statsmodels.stats.outliers_influence import variance_inflation_factor
+	X = df[['col_1', 'col_2', 'col_3']]
+	vif = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
+	vif = zip(X, vif)
+	print(list(vif))
+	```
+	避免同时挑选上两个明显有线性关系的变量作为X<sub>i</sub>&X<sub>j</sub>，或是将两个有很强线性关系的变量转化成一个新的变量。
+		
+	借助其他回归方法分析：Ridge regression，Lasso regression，Principal component analysis (PCA)
+		
+### 用python建立多元回归模型
+	- 建模
 
-- E 解释
+		```python
+		# 准备数据
+		X = origData[["col_1/X1","col_2/X2",...,"col_n/Xn"]]
+		Y = origData[["col_0/Y"]]
+		# 导入库
+		from sklearn.model_selection import train_test_split
+		# 把数据分成建模和测试两部分
+		X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.3, random_state = 42]
+		# 准备建模用api
+		ols_data = pd.concat([X_train, y_train], axis = 1)
+		# Write out formula 定义Y和X分别是哪列数据
+		ols_formula = "col_0/Y ~ col_1/X1 + C(col_2/categorical X2)+...+col_n/Xn"
+		# Import ols function
+		from statsmodels.formula.api import ols
+		# Build OLS, fit model to data 用OLS方法建模计算出回归线
+		OLS = ols(formula = ols_formula, data = ols_data)
+		model = OLS.fit()	
+		```
+
+	- 各项统计指标的含义
 
 ### variable selection
 
-选择包含什么参数/影响因素到回归模型里
+选择包含什么参数/影响因素到回归模型里。根据建模后的指标数值，调整模型。
 
 - underfitting和overfitting
 	
