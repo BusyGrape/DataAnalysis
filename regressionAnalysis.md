@@ -203,7 +203,7 @@ minimizing loss function / error
 			
 		- Hold-out sample 
 			
-			不能是之前建模fit model时使用过的数据，可以用这组数据检测以上三个值
+			不能是之前建模fit model时使用过的数据，可以用这组新数据检测以上三个值
 			
 - E 对建模结果进行全面评估和解释
 	- 解释模型的统计指标都意味着什么，比如斜率表明的Y将如何因为X而变化
@@ -225,7 +225,7 @@ Y = β<sub>0</sub>+β<sub>1</sub>X<sub>1</sub>+...+β<sub>n</sub>X<sub>n</sub>
 X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 二进制的位数和X有几个特征有关
 
-### interaction
+### interaction 交互项/交叉变量
 
 ### 建模分析过程PACE
 - A 检查线性回归假设是不是都满足
@@ -239,7 +239,7 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 		
 	- No multicollinerity assumption 自变量之间没有线性关系假设
 	
-		还是通过所有变量之间的两两散点图来判断<br>
+		通过所有变量之间的两两散点图来判断sns.pairplot()<br>
 		如果散点图不好判断，可以计算两个变量之间的VIF值（1~∞）。VIF越大线性关系越强。
 		
 			from statsmodels.stats.outliers_influence import variance_inflation_factor
@@ -249,4 +249,35 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 			print(list(vif))
 			
 	避免同时挑选上两个明显有线性关系的变量作为X<sub>i</sub>&X<sub>j</sub>，或是将两个有很强线性关系的变量转化成一个新的变量。
-			
+		
+		借助其他回归方法分析：Ridge regression，Lasso regression，Principal component analysis (PCA)
+		
+- C 建模
+
+		# 准备数据
+		X = origData[["X1","X2",...,"Xn"]]
+		Y = origData[["Y virable"]]
+		# 导入库
+		from sklearn.model_selection import train_test_split
+		# 把数据分成建模和测试两部分
+		X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.3, random_state = 42]
+		# 准备建模用api
+		ols_data = pd.concat([X_train, y_train], axis = 1)
+		# Write out formula 定义Y和X分别是哪列数据
+		ols_formula = "column2/Y ~ column1/X<sub>1</sub> + C(categorical X<sub>2</sub>)+...+X<sub>n</sub>"
+		# Import ols function
+		from statsmodels.formula.api import ols
+		# Build OLS, fit model to data 用OLS方法建模计算出回归线
+		OLS = ols(formula = ols_formula, data = ols_data)
+		model = OLS.fit()
+
+- E 解释
+
+### variable selection
+- underfitting和overfitting
+	
+	R<up>2</up>太低或太低或太高<br>
+	太低等于回归模型没有抓住样本的特征<br>
+	太高则太贴合样本的特征而无法延展出整体的特征，不能很好地预测未知数据组
+	
+- adjusted R-squared value
