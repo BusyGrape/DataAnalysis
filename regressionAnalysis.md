@@ -85,20 +85,17 @@ minimizing loss function / error
 	- 观察两两散点图矩阵
 			
 		```python
-		
 		# 我搜了一下，多个帖子都说
 		# 画两两散点图就用seaborn库
 		import seaborn as sns		
 		# 给每两个变量之间画一幅散点图
 		sns.pairplot(origData)
-		
 		```
 
 - C 建模
 	- Step1 Build a model
 			
 		```python
-		
 		# Subset Data 清洗并选择要进行回归分析的两列数据
 		ols_data = origData[["column1/X", "column2/Y"]]
 		# Write out formula 定义Y和X分别是哪列数据
@@ -108,7 +105,6 @@ minimizing loss function / error
 		# Build OLS, fit model to data 用OLS方法建模计算出回归线
 		OLS = ols(formula = ols_formula, data = ols_data)
 		model = OLS.fit()
-		
 		```
 							
 	- Step 2 Model evaluation
@@ -116,7 +112,6 @@ minimizing loss function / error
 		P-value，Confidence Intervals
 
 		```python
-
 		# print statistics 输出模型的各项统计指标
 		model.summary()
 
@@ -129,13 +124,11 @@ minimizing loss function / error
 		fitted_values = model.predict(X)
 		# Residuals，用resid公式获得残差值
 		residuals = model.resid
-
 		```
 		
 		Homoscedasticity
 
 		```python
-
 		# Residuals在0附近的偏移量散点图
 		import matplotlib.pyplot as plt
 		fig = sns.scatterplot(x=fitted_values, y=residuals)
@@ -143,13 +136,11 @@ minimizing loss function / error
 		fig.set_xlabel("Fitted Values")
 		fig.set_ylabel("Residuals")
 		plt.show()
-		
 		```
-
+		
 		Normality
 
 		```python
-
 		# Residuals的柱状图
 		fig = sns.histplot(residuals)
 		fig.set_xlabel("Residual Value")
@@ -159,7 +150,6 @@ minimizing loss function / error
 		import statsmodels.api as sm
 		fig = sm.qqplot(model.resid, line = 's')
 		plt.show()
-		
 		```
 			
 		R<up>2</up>，MSE/MAE			
@@ -262,20 +252,16 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 		通过所有变量之间的两两散点图来判断
 
 		```python
-		
 		sns.pairplot()
-		
 		```
 		如果散点图不好判断，可以计算两个变量之间的VIF值（1~∞）。VIF越大线性关系越强。
 		
 		```python
-
 		from statsmodels.stats.outliers_influence import variance_inflation_factor
 		X = df[['col_1', 'col_2', 'col_3']]
 		vif = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
 		vif = zip(X, vif)
 		print(list(vif))
-		
 		```
 		避免同时挑选上两个明显有线性关系的变量作为X<sub>i</sub>&X<sub>j</sub>，或是将两个有很强线性关系的变量转化成一个新的变量。
 			
@@ -284,7 +270,6 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 - C 建模
 
 	```python
-
 	# 准备数据
 	X = origData[["X1","X2",...,"Xn"]]
 	Y = origData[["Y virable"]]
@@ -300,8 +285,7 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	from statsmodels.formula.api import ols
 	# Build OLS, fit model to data 用OLS方法建模计算出回归线
 	OLS = ols(formula = ols_formula, data = ols_data)
-	model = OLS.fit()
-	
+	model = OLS.fit()	
 	```
 
 - E 解释
