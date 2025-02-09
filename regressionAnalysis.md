@@ -93,7 +93,7 @@ minimizing loss function / error
 - C 建模
 	- Step1 Build a model
 
-			```python
+			```
 			# Subset Data 清洗并选择要进行回归分析的两列数据
 			ols_data = origData[["column1/X", "column2/Y"]]
 			# Write out formula 定义Y和X分别是哪列数据
