@@ -152,7 +152,17 @@ minimizing loss function / error
 		plt.show()
 		```
 			
-		R<up>2</up>，MSE/MAE			
+		R<up>2</up>，MSE/MAE
+		```python
+		# 导入库sklearn
+		from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+		# 假设已经有一组Hold_out sample[["x_test","y_test"]]
+		y_test_pred = model.predict(x_test)
+		MSE = mean_squared_error(y_test,y_test_pred)
+		MAE = mean_absolute_error(y_test,y_test_pred)
+		R2 = r2_score(y_test,y_test_pred)
+		print('MSE:',MSE,'/nMAE:',MAE,'/nR2:',R2)
+		```
 		
 		
 - E 对建模进行全面评估和解释
@@ -273,28 +283,28 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	借助其他回归方法分析：Ridge regression，Lasso regression，Principal component analysis (PCA)
 		
 ### 用python建立多元回归模型
-	- 建模
+- C 建模
 
-		```python
-		# 准备数据
-		X = origData[["col_1/X1","col_2/X2",...,"col_n/Xn"]]
-		Y = origData[["col_0/Y"]]
-		# 导入库
-		from sklearn.model_selection import train_test_split
-		# 把数据分成建模和测试两部分
-		X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.3, random_state = 42]
-		# 准备建模用api
-		ols_data = pd.concat([X_train, y_train], axis = 1)
-		# Write out formula 定义Y和X分别是哪列数据
-		ols_formula = "col_0/Y ~ col_1/X1 + C(col_2/categorical X2)+...+col_n/Xn"
-		# Import ols function
-		from statsmodels.formula.api import ols
-		# Build OLS, fit model to data 用OLS方法建模计算出回归线
-		OLS = ols(formula = ols_formula, data = ols_data)
-		model = OLS.fit()	
-		```
+	```python
+	# 准备数据
+	X = origData[["col_1/X1","col_2/X2",...,"col_n/Xn"]]
+	Y = origData[["col_0/Y"]]
+	# 导入库
+	from sklearn.model_selection import train_test_split
+	# 把数据分成建模和测试两部分
+	X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.3, random_state = 42]
+	# 准备建模用api
+	ols_data = pd.concat([X_train, y_train], axis = 1)
+	# Write out formula 定义Y和X分别是哪列数据
+	ols_formula = "col_0/Y ~ col_1/X1 + C(col_2/categorical X2)+...+col_n/Xn"
+	# Import ols function
+	from statsmodels.formula.api import ols
+	# Build OLS, fit model to data 用OLS方法建模计算出回归线
+	OLS = ols(formula = ols_formula, data = ols_data)
+	model = OLS.fit()	
+	```
 
-	- 各项统计指标的含义
+- E 各项统计指标的含义
 
 ### variable selection
 
@@ -303,14 +313,17 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 - underfitting和overfitting
 	
 	R<sup>2</sup>太低或太低或太高<br>
-	太低等于回归模型没有抓住样本的特征<br>
-	太高则太贴合样本的特征而无法延展出整体的特征，不能很好地预测未知数据组
+	太低等于回归模型没有抓住样本的特征，也就约等于拟合无效<br>
+	太高则有可能是因为太贴合样本的特征，所以反而无法延展出整体的特征，不能很好地用于预测未知数据组
 	
-- adjusted R-squared value
+- Adjusted R-squared value
 
-- forward selection
+	R<sup>2</sup>会随着样本数量增加而自然趋近于1，Ajusted R<sup>2</sup>去除了样本数量和特征（自变量）数量对评分的影响，所以更好用。
 
-- backward elimiation
+- forward selection & backward elimiation
+	
+	forward是从第一个可能的特征/因素/自变量开始，一个一个判断是否要包含<br>
+	backward是先包含所有可能的特征，再从最后一个开始判断是不是要剔除
 
 - Extra-sum-of-squares F-test
 
