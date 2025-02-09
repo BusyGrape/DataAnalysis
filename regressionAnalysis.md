@@ -240,11 +240,13 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	- No multicollinerity assumption 自变量之间没有线性关系假设
 	
 		还是通过所有变量之间的两两散点图来判断<br>
-		如果散点图不好判断，可以计算两个变量之间的VIF值（1~∞）。VIF越大线性关系越强。<br>
+		如果散点图不好判断，可以计算两个变量之间的VIF值（1~∞）。VIF越大线性关系越强。
+		
 			from statsmodels.stats.outliers_influence import variance_inflation_factor
 			X = df[['col_1', 'col_2', 'col_3']]
 			vif = [variance_inflation_factor(X.values, i) for i in range(X.shape[1])]
 			vif = zip(X, vif)
 			print(list(vif))
+			
 	避免同时挑选上两个明显有线性关系的变量作为X<sub>i</sub>&X<sub>j</sub>，或是将两个有很强线性关系的变量转化成一个新的变量。
 			
