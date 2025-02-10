@@ -278,8 +278,6 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	```
 	避免同时挑选上两个明显有线性关系的变量作为X<sub>i</sub>&X<sub>j</sub>，或是将两个有很强线性关系的变量转化成一个新的变量。
 		
-	借助其他回归方法分析：Ridge regression，Lasso regression，Principal component analysis (PCA)
-		
 ### 用python建立多元回归模型
 - C 建模
 
@@ -306,7 +304,7 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 
 ### variable selection
 
-选择包含什么参数/影响因素到回归模型里。根据建模后的指标数值，调整模型。
+选择包含什么特征/影响因素/自变量到回归模型里。根据建模后的指标数值，调整模型。
 
 - underfitting和overfitting
 	
@@ -328,6 +326,49 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 		
 		based on p-value
 
-- Regularization
+- Regularization 正则化
+	
+	解决过度拟合的模型，降低variance增加bias<br>
+	Lasso Regression 去掉所有对预测Y不太有用的特征<br>
+	Ridge Regression 降低不重要特征的影响但不会去掉它们
+	
+	Elastic Net regression 测试lasso和ridge哪个或混合模式更好
+	
+	Principal component analysis (PCA) 阅读材料里的概念
 
-## M4 
+## M4 Advanced hypothesis testing 假设检验
+### chi-squared test χ<sup>2</sup>卡方检验
+
+用于检验与分类变量相关的假设
+
+- χ<sup>2</sup> Goodness of fit test 卡方适合度检验
+
+	观测值是否符合预期分布规律<br>
+	Null hypothesis(H<sub>0</sub>) 观测值符合预期分布规律<br>
+	Alternative hypothesis(H<sub>1</sub>) 不符合预期分布
+	
+	卡方值计算公式<br>
+	χ<sup>2</sup> = Σ((observed-expected)<sup>2</sup>/expedted)
+	
+	再继续若干步计算后查出P-value，根据置信度决定拒绝或接受H<sub>0</sub><br>
+	P<置信度，拒绝H<sub>0</sub>
+	
+	expected values分类数小于5时，适合度检验可能不准确。
+	
+	```python
+	import scipy.stats as stats
+	observations = [650, 570, 420, 480, 510, 380, 490]
+	expectations = [500, 500, 500, 500, 500, 500, 500]
+	result = stats.chisquare(f_obs=observations, f_exp=expectations)
+	```
+	
+- χ<sup>2</sup> Test for independence 卡方独立性检验
+
+	检验两个分类变量之间是否相互独立<br>
+	Null hypothesis(H<sub>0</sub>) 两个分类变量之间相互独立<br>
+	Alternative hypothesis(H<sub>1</sub>) 两个分类变量互相影响
+	
+	矩阵，横列是变量1的若干种情况，纵列是变量2的若干种情况<br>
+	横纵交叉点上记录观测数量的累计值<br>
+	再计算每个交叉点的期望值E<sub>ij</sub> = R<sub>i</sub>C<sub>j</sub>/T
+	
