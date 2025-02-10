@@ -350,6 +350,8 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	卡方值计算公式<br>
 	χ<sup>2</sup> = Σ((observed-expected)<sup>2</sup>/expedted)
 	
+	自由度，分类数-1
+	
 	再继续若干步计算后查出P-value，根据置信度决定拒绝或接受H<sub>0</sub><br>
 	P<置信度，拒绝H<sub>0</sub>
 	
@@ -370,5 +372,18 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	
 	矩阵，横列是变量1的若干种情况，纵列是变量2的若干种情况<br>
 	横纵交叉点上记录观测数量的累计值<br>
-	再计算每个交叉点的期望值E<sub>ij</sub> = R<sub>i</sub>C<sub>j</sub>/T
+	再计算每个交叉点的期望值E<sub>ij</sub> = R<sub>i</sub>_sum*C<sub>j</sub>_sum/Total
+	
+	卡方值计算同上<br>
+	自由度，横分类数m，纵分类数n，(m-1)*(n-1)<br>
+	P-value判断拒绝或接受假设同上
+	
+	```python
+	import numpy as np
+	import scipy.stats as stats
+	observations = np.array([[850, 450],[1300, 900]])
+	result = stats.contingency.chi2_contingency(observations, correction=False)
+	# result output order: the 𝛸2 statistic, p-value, degrees of freedom, and expected values in array format
+	```
+	
 	
