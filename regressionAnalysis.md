@@ -386,4 +386,37 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	# result output order: the 𝛸2 statistic, p-value, degrees of freedom, and expected values in array format
 	```
 	
+### ANOVA 方差分析
+
+用于分析分类变量X的取值是否对Y造成影响。<br>
+方差分析比较的是在不同分类下的数据平均数和整体数据的平均数。
+
+- One-way ANOVA
+
+	用于比较1个分类变量<br>
+	首先将样本数据按各个类别分组[[group,Y]]<br>
+	H<sub>0</sub>：分组后，Y的平均值应该相等。分类变量对Y没有影响。<br>
+	H<sub>1</sub>：分组后，至少有一组Y的平均值与其他不同。分类变量对Y有影响。<br>
+	5个步骤：
+	- 1 计算每组/每各分类下的Y的组平均值M<sub>g</sub>，以及所有Y的总平均值M<sub>G</sub>
+	- 2 计算SSB和SSW
+		
+		SSB = ∑n<sub>g</sub> * (M<sub>g</sub>-M<sub>G</sub>)<sup>2</sup><br>		
+		n：每组有多少个样本
+		
+		SSW = ∑∑(Y<sub>g</sub><sub>i</sub>-M<sub>g</sub>)<sup>2</sup><br>
+		先计算每组Y与组平均之间的差额平方，再汇总各个组的差额平方
+	- 3 计算MSSB和MSSW
+		
+		MSSB = SSB/(k-1)<br>
+		k代表有多少种分类，多少组；k-1同时是组内自由度
 	
+		MSSW = SSW/(n-k)<br>
+		n是所有样本的数量，各个组总和；n-k同时是组间自由度
+	
+	- 4 计算F值
+	
+		F = MSSB/MSSW<br>
+		F值越大，越能表示至少有一组数据对Y产生了影响
+		
+	- 5 查表确定p-value，得出是否推翻null假设的结论
