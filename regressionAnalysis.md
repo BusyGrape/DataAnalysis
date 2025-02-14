@@ -388,15 +388,15 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	
 ### ANOVA 方差分析
 
-用于分析分类变量X的取值是否对Y造成影响。<br>
+用于分析一对变量（之中有一个是分类变量）之间是否互相影响。<br>
 方差分析比较的是在不同分类下的数据平均数和整体数据的平均数。
 
 - One-way ANOVA
 
 	用于比较1个分类变量<br>
-	首先将样本数据按各个类别分组[[group,Y]]<br>
-	H<sub>0</sub>：分组后，Y的平均值应该相等。分类变量对Y没有影响。<br>
-	H<sub>1</sub>：分组后，至少有一组Y的平均值与其他不同。分类变量对Y有影响。<br>
+	首先将样本数据按各个类别分组[[catogoricalX,numericalX]]<br>
+	H<sub>0</sub>：分组后，nX的平均值应该相等。分类变量对nX没有影响。<br>
+	H<sub>1</sub>：分组后，至少有一组nX的平均值与其他不同。分类变量对nX有影响。<br>
 	5个步骤：
 	- 1 计算每组/每各分类下的Y的组平均值M<sub>g</sub>，以及所有Y的总平均值M<sub>G</sub>
 	- 2 计算SSB和SSW
@@ -404,7 +404,7 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 		SSB = ∑n<sub>g</sub> * (M<sub>g</sub>-M<sub>G</sub>)<sup>2</sup><br>		
 		n：每组有多少个样本
 		
-		SSW = ∑∑(Y<sub>g</sub><sub>i</sub>-M<sub>g</sub>)<sup>2</sup><br>
+		SSW = ∑∑(nX<sub>g</sub><sub>i</sub>-M<sub>g</sub>)<sup>2</sup><br>
 		先计算每组Y与组平均之间的差额平方，再汇总各个组的差额平方
 	- 3 计算MSSB和MSSW
 		
@@ -417,6 +417,40 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	- 4 计算F值
 	
 		F = MSSB/MSSW<br>
-		F值越大，越能表示至少有一组数据对Y产生了影响
+		F值越大，越能表示至少有一组数据对nX产生了影响
 		
 	- 5 查表确定p-value，得出是否推翻null假设的结论
+	
+	```python
+	# 导入库
+	import pandas as pd
+	import seaborn as sns
+	diamonds = sns.load_dataset("diamonds")
+	diamonds = pd.read_cvs("diamonds.csv")
+	# 生成box图，肉眼查看两个变量之间的关系
+	sns.boxplot(x = "color", y="log_price", data = diamonds)
+	# 建立回归模型计算统计指标
+	import statsmodels.api as sm
+	from statesmodes.formula.api import as ols
+	model = ols(formula = "log_price ~ C(color)", data = diamonds).fit()
+	# 输出statistics 统计指标
+	model.summary()
+	# 跑一个one-way ANOVA
+	sm.stats.anova_lm(model), typ = 2)
+	```
+
+- Two-way ANOVA
+
+	用于比较2个分类变量<br>
+	
+	|H<sub>0</sub>：|H<sub>1</sub>|
+	|X1的类别对Y没有影响|X1的类别对Y有影响|
+	|X2的类别对Y没有影响|X2的类别对Y有影响|
+	|X1的类别对Y的影响与X2的类别对Y的影响无关|X1与X2的分类之间有互相作用并影响Y值|
+	
+	```python
+	H<sub>0</sub>：分组后，nX的平均值应该相等。分类变量对nX没有影响。<br>	# 加入cut因素
+	H<sub>1</sub>：分组后，至少有一组nX的平均值与其他不同。分类变量对nX有影响。<br>	diamonds2 = 
+	diamonds2.head()
+	model2 = ols(formula = "log_price ~ C(color) + C(cut) + C(color):C(cut)", data = diamonds2).fit()
+	```
