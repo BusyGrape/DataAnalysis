@@ -435,13 +435,13 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	model = ols(formula = "log_price ~ C(color)", data = diamonds).fit()
 	# 输出statistics 统计指标
 	model.summary()
-	# 跑一个one-way ANOVA
-	sm.stats.anova_lm(model), typ = 2)
+	# 跑一个one-way ANOVA 看F值和P-value
+	sm.stats.anova_lm(model, typ = 2)
 	```
 
 - Two-way ANOVA
 
-	用于比较2个分类变量<br>
+	用于比较2个分类变量
 	
 	|H<sub>0</sub>|H<sub>1</sub>
 	|:------------|:------------
@@ -450,8 +450,27 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	|X1的类别对Y的影响与X2的类别对Y的影响无关|X1与X2的分类之间有互相作用并影响Y值
 	
 	```python
-	H<sub>0</sub>：分组后，nX的平均值应该相等。分类变量对nX没有影响。<br>	# 加入cut因素
-	H<sub>1</sub>：分组后，至少有一组nX的平均值与其他不同。分类变量对nX有影响。<br>	diamonds2 = 
+	# 导入数据
+	diamonds2 = pd.read_csv("diamonds2.csv")
 	diamonds2.head()
 	model2 = ols(formula = "log_price ~ C(color) + C(cut) + C(color):C(cut)", data = diamonds2).fit()
+	sm.stats.anova_lm(model2, type = 2)
+	# 上面的结果有四行，其中P-value用于逐条拒绝 H0
 	```
+	
+- post-hoc tests 事后检验
+	
+	由于ANOVA只能告诉我们分类变量对结果有影响，但并不能准确指出是哪（些）种分类会带来影响，这时候需要再进一步做检验。
+	
+	H<sub>0</sub>：两种分类下Y值是一样的<br>
+	H<sub>1</sub>：两种分类下的Y值不一样
+	
+	Tukey's HSD法，更注重不要出现typeI错误，错误的将一对本来是没有差别的分类认做是有差别的。
+	
+	```python
+	from statesmodes.status.multicom import pairwise_tukeyhsd
+	tuke_oneway = pairwise_tukeyhsd(endog = diamonds["log_price"], groups = diamonds["color"], alpha = 0.05)
+	tuke_oneway.summary()
+	```
+	
+	会得到一个表格，最后一列会直接写出false or true，不能或可以拒绝H<sub>0</sub>
