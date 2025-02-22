@@ -600,5 +600,25 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 		然后对odd做一次取对数log运算logit(Y=1)；<br>
 		最后，发现logit和X之间存在线性关系，找出线性回归公式
 		
-		想要用一般线性回归的思路来解释X和归类Y之间的关系，就需要加入逆向换算：
-		β<sub>0</sub>>>e<sup>β<sub>1</sub></sup>
+		想要用一般线性回归的思路来解释X和归类Y之间的关系，就需要加入逆向换算：<br>
+		β<sub>0</sub>>>e<sup>β<sub>1</sub></sup>，得到odd伴随x<sub>1</sub>变化的斜率（在其他X不变的情况下）
+	
+	- Scikit-lear vs Statsmodels
+		
+		如果想要P-value和confidence interval，只能借助Statsmodels
+		
+	- AIC BIC（不知道这两个概念是什么）
+	- 用precision 查准率，通常因为出现false positive的后果比false negative严重
+	- 用recall 查全率，通常因为出现false negative的后果比false positive严重
+	- 用accuracy 准确率，通常因为更关心模型预测的准确率
+	
+### Compare regression models 回归模型比较
+- 做回归分析是为了回答什么问题？要预测什么事情？
+- 样本里哪个特征（列数据）可以作为输出变量Y，被预测对象？
+- Y是什么类型的数据？连续的还是离散的或是二元的？
+
+	连续数据更适合做线性回归分析，而二元数据更适合做逻辑回归分析
+
+- 根据要分析事物的具体情况，选择的建模手段
+
+	包括要预测的事情，更关心预测准确度还是排除错误或是包含正确的选项等；样本其他特征还有哪些，多少个，各自的属性；
