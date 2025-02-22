@@ -568,17 +568,9 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	metrics.accuracy_score(y_test, y_pred)
 	```
 	
-	- Precision 精确率/查准率
-		
-		True positive/(True positives + False positives)
-		
-	- Recall 召回率/查全率
-	
-		True positives/(True positives + False negatives)
-		
-	- Accuracy 准确率
-		
-		（True positives + False negatives)/Total predictions 
+	- Precision 精确率/查准率：True positive/(True positives + False positives)
+	- Recall 召回率/查全率：True positives/(True positives + False negatives)
+	- Accuracy 准确率：（True positives + False negatives)/Total predictions 
 
 - ROC curve & AUC
 	
