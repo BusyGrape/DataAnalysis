@@ -474,3 +474,138 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	```
 	
 	会得到一个表格，最后一列会直接写出false or true，不能或可以拒绝H<sub>0</sub>
+
+### ANCOVA, MANNOVA and MANCOVA
+- ANCOVA 协方差分析
+
+	分析带有有共同作用的两组或多组分类变量。但会消除两个分类变量之间的互相影响。隔离一个变量，分析另一个分类变量是否带来影响。
+	
+	H<sub>0</sub>：不论第一个分类变量如何，第二个分类变量不会对Y造成影响。Mean一样
+	H<sub>1</sub>：不论第一个分类变量如何，第二个分类变量会对Y造成影响。Mean不一样
+	
+- MANOVA & MANCOVA
+
+	在ANOVA和ANCOVA基础上，增加了分析分类变量对多个连续的outcome variables的影响。
+	
+	(还需要再仔细了解以上四种回归分析方法到底各自是做什么用的)
+
+## Logisic regression 逻辑回归
+### Foundations of logistic regression 逻辑回归基础
+- Binomial logistic regression 二元逻辑回归
+	
+	当Y是有两个选项的分类变量时，拟合落入2选1结果的概率。
+
+- 逻辑假设
+	- Linearity assumption
+		
+		X和logit(Y=1)线性相关
+		
+		odds = p(Y=1)/(1-p(Y=1))<br>
+		logit >> log it >> log odds<br>
+		logit(Y=1)=log(p(Y=1)/(1-p(Y=1)))
+		
+		log(p/(1-p)) = β<sub>0</sub>+β<sub>1</sub>X<sub>1</sub>+...+β<sub>n</sub>X<sub>n</sub>
+	
+	- Independent observations 样本之间相互独立
+	- No multicollinerity 各个X之间无线性关系
+	- No extreme outliers 没有极端样例
+		
+		这个假设和线性回归不同。一般在跑完回归模型以后才能判断样本偏离程度。如果有极端样例，可以考虑对样本数据进行换算调整，或者干脆去掉极端样本。
+		
+- MLE 最大可能性法
+	
+	找出观察到所有样本同时发生的最大可能性。因为样本之间相互独立，所以观察到一组样本的概率就是每个样本单独发生概率的乘积。
+	
+### Logistic regression with Python
+
+	```python
+	# 获得一组数据的统计学特征
+	activity.describe()
+	# 预览前几行数据
+	activity.head()
+	# 导入可进行逻辑回归分析的库
+	from sklearn.model_selection import train_test_split
+	from sklearn.linear_model import LogisicRegression
+	# 指定X和Y
+	x = activity[["col_1"]]
+	y = activity[["Category_col_2"]]
+	# 把数据分成建模和测试两部分
+	x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=42)
+	# 建立逻辑回归模型，并将模型赋值给clf，classifier的简称
+	clf = LogisicRegression().fit(x_train,y_train)
+	# 获得β<sub>1</sub>
+	clf.coef_
+	# 获得β<sub>0</sub>
+	clf.intercept_
+	# 画一个有样本和回归曲线的图
+	import seaborn as sns
+	sns.regplot(x="col_1", y="Category_col_2", data=activity, logistic=True) 
+	```
+
+### Interpret logistic regression results 解释
+
+	```python
+	# 用测试数据检验
+	y_pred = clf.predict(x_test)
+	# predict会将概率大于等于0.5的加标签1
+	# 如果想看概率到底是什么，用predict_proba
+	clf.predict_proba(x_test)[::,-1]
+	```
+
+- Confusion matrix 混淆矩阵
+
+	看预测的分类与实际分类相比，准确度如何
+	
+	```python
+	import sklearn.metrics as metrics
+	cm = metrics.confusion_matrix(y_test, y_pred, labels=clf.classes_)
+	disp = metrics.ConfusionMatrixDisplay(confusion_matrix=cm, display_labels = clf.classes_)
+	# 画四象限图：两种预测对了的，和typeI typeII错误分别显示
+	disp.plot()
+	# precision/recall/accuracy
+	metrics.precision_score(y_test, y_pred)
+	metrics.recall_score(y_test, y_pred)
+	metrics.accuracy_score(y_test, y_pred)
+	```
+	
+	- Precision 精确率/查准率
+		
+		True positive/(True positives + False positives)
+		
+	- Recall 召回率/查全率
+	
+		True positives/(True positives + False negatives)
+		
+	- Accuracy 准确率
+		
+		（True positives + False negatives)/Total predictions 
+
+- ROC curve & AUC
+	
+	ROC curve receiver operating characteristic curve，展现True positive rate(recall) 和 False Negative rate 之间对应关系。X轴为FP，Y轴为TP。
+	
+	理想的模型是在TP高的同时FP低，所以ROC曲线越凸出接近左上角，模型越好。
+	
+	```python
+	import matplotlib.pyplot as plt 
+	from sklearn.metrics import RooCurveDisplay
+	RocCurveDisplay.from_predictions(y_test, y_pred)
+	plt.show()
+	```
+	
+	AUC area under the ROC curve，指的是ROC曲线和X轴之间形成的面。0~100%。AUC=0是预测完全错误，AUC=100%/1是预测完全正确。一般来说AUC低于0.5说明模型预测分类的能力和随机分配分类没有区别。
+	
+	```python
+	metrics.roc_auc_score(y_test,y_pred)
+	roc_auc_score()
+	```
+- 解释逻辑回归模型
+	- logit
+		
+		在进行逻辑回归时，我们进行了几次思路转换：<br>
+		首先，观察落入某种归类的概率，给分类找到一种可以用数字描述的方式；<br>
+		然后计算出 每个样本如果正好是要进一步研究的分类 这样的概率odd是多少；<br>
+		然后对odd做一次取对数log运算logit(Y=1)；<br>
+		最后，发现logit和X之间存在线性关系，找出线性回归公式
+		
+		想要用一般线性回归的思路来解释X和归类Y之间的关系，就需要加入逆向换算。
