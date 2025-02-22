@@ -608,4 +608,5 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 		然后对odd做一次取对数log运算logit(Y=1)；<br>
 		最后，发现logit和X之间存在线性关系，找出线性回归公式
 		
-		想要用一般线性回归的思路来解释X和归类Y之间的关系，就需要加入逆向换算。
+		想要用一般线性回归的思路来解释X和归类Y之间的关系，就需要加入逆向换算：
+		β<sub>0</sub>>>e<sup>β<sub>1</sub></sup>
