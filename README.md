@@ -12,4 +12,10 @@ End at Feb 1, 2025
 [Study notes](/regressionAnalysis.md "点击去看看我的“随堂笔记”")
 
 Start at Feb 1, 2025<br>
-End at
+End at Feb 22,2025
+
+## Machine Learning
+[Study notes](/machineLearning.md "点击去看看我的“随堂笔记”")
+
+Start at Feb 22, 2025<br>
+End at Feb 

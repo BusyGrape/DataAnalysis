@@ -1,5 +1,7 @@
 # Regression Analysis 回归分析
 
+[Course link](https://www.coursera.org/learn/regression-analysis-simplify-complex-data-relationships/home/module/5 "") 
+
 简单介绍做“回归分析”的步骤PACE：从拆解问题到结论释义<br>
 学习两种回归分析方法linear and logistic：线性回归和逻辑回归<br>
 了解这两种回归分析如何解决实际问题。
@@ -617,7 +619,7 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 - 样本里哪个特征（列数据）可以作为输出变量Y，被预测对象？
 - Y是什么类型的数据？连续的还是离散的或是二元的？
 
-	连续数据更适合做线性回归分析，而二元数据更适合做逻辑回归分析
+	连续数据可能更适合做线性回归分析，而二元数据更适合做逻辑回归分析，如果想知道某个变量对Y是否造成影响更适合做假设检验
 
 - 根据要分析事物的具体情况，选择的建模手段
 
