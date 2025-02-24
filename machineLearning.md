@@ -97,6 +97,55 @@ ML:设定好判断标准，然后让机器自己找到规律。而不是通过�
 	
 
 ## M2 Workflow for building complex models 
+- P 计划 Plan
+	
+	要分析什么事情，使用对象是谁，项目成果应该是什么样的，数据哪里来，质量如何。<br>
+	要不要建模，预测对象是连续的还是离散的，用什么回归方法，用什么模型<br>
+	可用的，适合的分析工具，软件，库，硬件，配合的人
 
+- A 分析 analyze
+
+	确定要预测是什么，以及什么样的样本数据结构可以支持接下来的建模分析步骤
+	
+	- Feature engineering 解决数据组成structure问题
+		
+		选择有用的属性featrue，转化不合适的数据属性，合并生成一种新属性<br>
+		[Selection / Transformation / Extraction](https://www.coursera.org/learn/the-nuts-and-bolts-of-machine-learning/supplement/7Q7BT/explore-feature-engineering "reading materials 常见处理方法")
+	
+	- solve issues from imbalanced datasets 不均衡的数据集
+		
+		特别是在处理分类变量时，如果某个分类占比特别高，如超过90%，某种分类占比特别低，如不足10%<br>
+		如果所建立的模型需要对占比很低的分类同样敏感，或是对这个分类进行预测<br>
+		那么可能需要人为干预样本中分类的比例<br>
+		
+		去掉多的 Downsampling：当样本数量很多时，如大于10万，直接随机拿掉一部分majority组的样本
+		
+		或是增加少的 Upsampling：当样本数量不够多时，直接复制minority组的数据；或者用少数组的数据生成新数据，比如每两个的平均值
+		
+		这么做的影响是让少数组被过度重视，比如在评估每个分类出现概率时，得到的结论就可能是错的，如果只是预测分类则可能还好。总之这是一个应该放在最后才被考虑的调整手段，一定要先尝试其他方法。
+
+	```python
+	# 导入packages
+	import numpy as np
+	import pandas as pd
+	# 导入数据
+	file_location = ".../*/*.cvs"
+	df_original = pd.read_cvs(file_location)
+	# 预览数据表
+	df_original.head()
+	# 查看数据结构 print high-level info about data
+	df_original.info()
+	# 选择有用属性/去掉无用属性 feature selection
+	churn_df = df_original.drop(['col_x','col_y','col_z'], axis=1)
+	# 构建新属性 extraction
+	churn_df = ['new_col'] = churn_df['col_x'] / churn_df['col_y'] 
+	# 转换属性 transformation
+	churn_df['col_need_to_be_transformed'].unique()
+	churn_df = pd.get_dummies(churn_df, drop_first=True)
+	```
+
+- C 建模 Construct
+	- Naive Bayes
 ## M3 Unsupervised learning techniques
+
 ## M4 Tree-based supervised learning
