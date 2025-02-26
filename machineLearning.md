@@ -145,7 +145,19 @@ ML:设定好判断标准，然后让机器自己找到规律。而不是通过�
 	```
 
 - C 建模 Construct
-	- Naive Bayes
+	- Naive Bayes-GaussianNB
+		以朴素贝叶斯算法为例，首先要选一个合适的算法，每个算法里还有不同的模型，这里选用高斯。每个模型适合做什么运算，有什么假设前提是需要大量时间学习和了解的。不过贝叶斯算法对CPU的消耗十分少，虽然过于简单，但仍然很受青睐
+		
+		然后检查一下分类的分布是不是够平均，不要有低于1：9这种极端不均衡的分布，如果有要进行少数样本放大步骤。然后把数据里不需要的列去掉。
+		
+		把样本分成训练和测试两组。注意要把少数组也按比例分到这两组里。stratify=y
+		
+		拟合模型，用测试组测试，跑评估矩阵，看拟合度指标accuracy/precision/recall/f1（参考[Regression analysis](/regressionAnalysis.md "")课程），然后根据结果进行适当的调整。再拟合模型……直到
+		
+- E 执行 Execute
+
+	根据评估结果，思考如何调整模型并得到更好的结果
+	
 ## M3 Unsupervised learning techniques
 
 ## M4 Tree-based supervised learning
