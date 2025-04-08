@@ -19,4 +19,5 @@ End at Feb 22, 2025
 [Study notes](/machineLearning.md "点击去看看我的“随堂笔记”")
 
 Start at Feb 22, 2025<br>
-End at Feb 
+Paused during March
+End at Apr 08 
