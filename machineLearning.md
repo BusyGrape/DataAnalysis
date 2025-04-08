@@ -158,7 +158,11 @@ churn_df = pd.get_dummies(churn_df, drop_first=True)
 	把样本分成训练和测试两组。注意要把少数组也按比例分到这两组里。stratify=y
 	
 	拟合模型，用测试组测试，跑评估矩阵，看拟合度指标accuracy/precision/recall/f1（参考[Regression analysis](/regressionAnalysis.md "")课程），然后根据结果进行适当的调整。再拟合模型……直到
-		
+
+	```python
+	# 略
+	```
+
 ### E 执行 Execute
 
 根据评估结果，思考如何调整模型并得到更好的结果
@@ -241,7 +245,9 @@ organize unlabeled data into groups or cluster 将无标签数据归类
 
 - Apply inertia and silhouette score with Python
 
-	略
+	```python
+	# 略
+	```
 
 ## M4 Tree-based supervised learning
 
@@ -287,6 +293,49 @@ organize unlabeled data into groups or cluster 将无标签数据归类
 ```
 		
 ### Tune tree-based models 调试决策树
+
+为了让模型既不过度拟合overfitting也不要拟合度太低underfitting，在训练模型前设定一些超级参数hyperparameters来控制模型训练过程找到某种拟合度的平衡。
+
+- Hyperparameters for decision trees 决策树常用的超级参数
+	- max_depth 最大深度
+
+		设定树的最大层数，任何一各分支超过这个数量将不再继续split
+		
+	- min_samples_split 可继续分割样本数
+		
+		设定分割前每个分支应该有的最少样本数量，如果一个分支的样本数量少于设定值，自动成为leaf node，不再继续参与split
+
+	- min_samples_leaf 末端最少包含样本数
+		
+		设定分割后任意一个子分支样本数两最小值。如果分割后任何一个子分支的样本数不能满足这个要求，那么母节点成为leaf node，不再继续参与split（本次分割也作废）。
+
+- Grid search 网格搜索
+	
+	找到最合适的超级参数的方法。每种超级参数选择一组数，然后将集中超级参数组合的矩阵带入到模型中逐个训练。再通过训练结果返回来比对那组超级参数效果最佳。
+	
+	由于网络搜索很耗算力资源，在设定每个超级参数的可能数值时，可以考虑用更少间隔更大的数字，如[1，3，5]代替[1，2，3，4，5]，等到确定这个参数的最佳值后，如果想进一步精细比较左右两个临近值，可以再用这个小范围的数字和其他参数组成新矩阵，再跑一次训练。
+
+- Model validation 模型验证
+	
+	不同于简单将样本分为训练和测试两组。加入验证步骤后，需要将所有的样本数据分成三份，一份用来训练模型（占比最高，比如60%），另外两份用来评估模型（如每份20%）。<br>
+	用来评估的两份，其中一份用于给不同模型打分并选出综合表现最好的一个。另一份留到最后用来跑预测看看最终模型是否能够给出较为准确的预测。
+	
+	- Validation
+		
+		当样本数量充足时，可以直接采用将样本分成三份的形式。不论测试还是评分部分的样本都不会因为数量太低而存在过大偏差，缺失某些重要特征等。
+		
+	- Cross-validation
+		
+		将样本分成5份，跑五次模型训练。每次都扣下1份作验证用，用剩下4份的训练模型。五次训练扣下的验证组要不同。然后将五次验证评分进行平均作为validation最终评分。
+		5份只是一种举例，可以分任意份。这种方式尤其适合本数量不大的模型训练，当留下验证组和测试组两组数据后，任何一份数据的特征都面临严重不足时。
+
+	- Model selection
+		
+		validation score只是一种参考。还需要考虑模型是否有合理的解释，是否过于复杂，对输入源和其他因素的依赖程度是否合理等等。
+
+	```python
+	# 略
+	```		
 
 ### Bagging, Bootstrap aggregation 引导聚类算法/装袋算法
 
