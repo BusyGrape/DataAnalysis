@@ -79,16 +79,21 @@ data and models need to match each other
 	IDE：integrated development environment
 
 - [python packages](https://www.coursera.org/learn/the-nuts-and-bolts-of-machine-learning/supplement/qAKAL/python-libraries-and-packages "reading materials")
-	- operational packages：pandas numpy syipy 
+	- operational packages
+		
+		pandas/numpy/syipy 
+		
 	- visualization packages
 		
 		Matplotlib: basic visualization
 		
 		Seaborn: statistical visualization
 		
-		Plotly: presentation or publications 甚至以互动
+		Plotly: presentation or publications 甚至可以互动
 		
-	- ML packages: Scikit learn
+	- ML packages
+		
+		Scikit learn
 		
 ### [ML resources](https://www.coursera.org/learn/the-nuts-and-bolts-of-machine-learning/supplement/eWVHw/find-solutions-online "reading materials")
 - package documentation 查看各个库的使用说明文档
@@ -242,6 +247,45 @@ organize unlabeled data into groups or cluster 将无标签数据归类
 
 ### Tree-based modeling 决策树模型
 
+决策树模型可以用于预测分类classfication problems，也可以用于预测一个连续变量的值regression problems
+
+- The structure of a classification tree
+
+	root node/decision nodes/leaf nodes 为了最大化使用芯片算例，决策树一般采用binary tree的形式。每次只将数据分成两组，产生两个子node。
+	
+	Decisions and splits: A decision node is split on the criterion that minimizes the impurity of the classes in their resulting children. 往下一层分配数据的原则是，尽量让某种类型都去一个子node里，而非平均分布在所有子node中，所谓提高纯度。
+
+- Categorical variables 
+	
+	用来决定如何分配的特征是分类变量时，split方法基于分类。每个可能的算法选择一种特征，询问是和否。符合的（是）总是去左边的子node，而否总是去右边的子node
+
+- Continuous variables
+
+	用来决定如何分配的特征是分类变量时，通常将连续数据切成若干个区间。每个可能的算法选择一个区间的界限值，询问是否小于等于这个值。小于等于的去左边，大于的去右边。
+
+- Choosing splits: Gini impurity
+
+	给每个可能的算法打分，gini impurity最接近0的算法最好。
+	
+	其他的打分方法还包括：entropy, information gain, and log loss. 
+
+- Grow the tree
+
+	只剩下一种分类class数据的node成为leaf node，剩下的node可以继续上面的split过程，直到每个叶子都只包含一种分类class的数据。
+
+- Advantages and disadvantages of classification trees 优缺点
+	- Advantages 优点
+		
+		不需要太多预处理/可以处理任何变量（分类，连续，不连续）/不需要放大或标准化数据/分类依据非常透明/不受极端数据限制
+	
+	- Disadvantages 缺点
+		
+		非常消耗算力/训练数据变化对预测结果影响很大
+
+```python
+略
+```
+		
 ### Tune tree-based models 调试决策树
 
 ### Bagging, Bootstrap aggregation 引导聚类算法/装袋算法
