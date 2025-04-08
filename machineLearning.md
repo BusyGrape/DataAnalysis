@@ -159,9 +159,9 @@ churn_df = pd.get_dummies(churn_df, drop_first=True)
 	
 	拟合模型，用测试组测试，跑评估矩阵，看拟合度指标accuracy/precision/recall/f1（参考[Regression analysis](/regressionAnalysis.md "")课程），然后根据结果进行适当的调整。再拟合模型……直到
 
-	```python
-	# 略
-	```
+```python
+# 略
+```
 
 ### E 执行 Execute
 
@@ -245,9 +245,9 @@ organize unlabeled data into groups or cluster 将无标签数据归类
 
 - Apply inertia and silhouette score with Python
 
-	```python
-	# 略
-	```
+```python
+# 略
+```
 
 ## M4 Tree-based supervised learning
 
@@ -333,10 +333,103 @@ organize unlabeled data into groups or cluster 将无标签数据归类
 		
 		validation score只是一种参考。还需要考虑模型是否有合理的解释，是否过于复杂，对输入源和其他因素的依赖程度是否合理等等。
 
-	```python
-	# 略
-	```		
+```python
+# 略
+```		
 
 ### Bagging, Bootstrap aggregation 引导聚类算法/装袋算法
 
+- Bootstrapping, bootstrap sample 
+	
+	可重复提取的取样方式。意味着同一个样本可以出现在多个不同的学习/训练Base Learner中；每次学习所用的样本可能包含重复样本。每次学习所使用的样本数需要与抽样所使用的样本数一致。
+
+- Aggregating and Ensemble
+	
+	Ensemble learning refers to building multiple models and aggregating their predictions. 
+	用不同的样本进行多次学习/训练，然后将训练结果集成为一个结果。当然多次学习所采用的样本是通过上述重复取样的方式来的。
+	
+	通常对于预测连续数据取平均值，对于预测分类数据取出现最多次数的分类。
+
+- 优势
+	
+	减小variance/训练速度快/尤其适合大数据
+
+### Random Forest 随机森林法
+
+Bagging + random feature sampling = random forest
+
+每个决策树decision tree/base learner能接触到的features不同且不能是全部特征。特征可能会跨树重复（应该不会在同一个树里重复，这个还没搜到解答）
+
+简单总结为什么要用随机森林，根据实际使用经验，可以用更少的样本跑出更好的结果，省时省力准确率高。
+
+- Tune random forest 调试随机森林
+	
+	所有decision tree的hyperparameters都可以使用<br>
+	随机森林特有的超级参数：
+	
+	- max_features 每个树选择的最大特征features数量	
+	- n_estimators 一种超级参数组合最多训练多少个树
+
+```python
+# 略
+```			
+
+- Pickle 保存和取用现成的模型
+
+```python
+# 略
+```			
+
 ### Boosting 提升方法
+
+Build an ensumble of weak learners.从上一个学习的结果找出不佳的结果开始下一理论学习。与随机森林的并行学习不同，是一种顺序学习的方法。
+
+- AdaBoost, adaptive boosting
+
+	下一次学习时，给预测错误的样本增加权重。
+	
+	在集成所有学习结果时也加入权重，让预测更准确的树对结果有更多影响力。
+	
+	这种方法可以有效减少bias/更容易理解/不需要对样本进行normalize or scale/特征之间有互相影响也无所谓
+	
+	所有tree model对outlier都不敏感
+
+- GBM, Gradient boosting
+	
+	下一次学习，y是上一次学习结果的残差residual error，X不变，学习方法不变。让后将所有学习的结果累加得出集成结果。
+	
+	- Advantages
+		
+		准确度高
+		
+		scalable
+		
+		对有缺失数据的样本表现良好
+		
+		不需要scale data
+	
+	- Disadvantages
+		
+		如果超级参数过多，比较消耗算力
+		
+		不好像其他人解释所以也叫black-box model，因此不适合某些行业比如医疗和银行需要清洗解释每个模型的运作原理
+		
+		不适合预测没见过的数据范围
+	
+	- Tune GBM model
+		
+		XGBoost = extrem gradient boosting, an optimized GBM package
+		
+		- 旧
+			
+			max_depth[2,10]/n_estimators[50,500]
+		
+		- 新
+			
+			learning_rate[0.01,0.3], 每次在学习的树在最终集成结果中的权重，一般给出的是个权重缩水比例
+			
+			min_child_weight，当子node权重低于自身值时就不再split。填写0-1是指权重，填写1-∞是样本数
+
+```python
+# 略
+```			
