@@ -4,7 +4,7 @@ This project includes my study notes from courses that I found really helpful fo
 # Google Advanced Data Analytics Professional Certificate
 Coursera Start at January, 2025
 ## Statistics
-Study notes
+[Study notes](/statistics.md "点击去看看我的“随堂笔记”")
 
 Start at Jan 22, 2025<br>
 End at Feb 1, 2025
