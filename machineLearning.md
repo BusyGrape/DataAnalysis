@@ -204,7 +204,21 @@ organize unlabeled data into groups or cluster 将无标签数据归类
 
 ### K-means Evaluation Metrics
 
-- 
+- Inertia
+
+	Inertia = ∑(x<sub>i</sub>-C<sub>k</sub>)<sup>2</sup>
+	
+	Inertia值越高，每组数据分布得越稀松。<br>
+	Inertia不能告诉我们聚类之间的距离。<br>
+	一般K值越高inertia值越低，但是K值增加到一定值以后，inertia不再快速降低。
+
+- Elbow M1ethod 
+	
+	画K与Inertia的曲线，找到K值的增加不再有显著效果的拐点
+
+- Silhouette Score
+
+- Silhouette analysis
 
 ## M4 Tree-based supervised learning
 
