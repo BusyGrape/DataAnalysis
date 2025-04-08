@@ -214,12 +214,36 @@ organize unlabeled data into groups or cluster 将无标签数据归类
 
 - Elbow M1ethod 
 	
-	画K与Inertia的曲线，找到K值的增加不再有显著效果的拐点
+	用不同的K值跑模型，得到inertia，<br>
+	画K与Inertia的曲线plot，找到K值的增加不再有显著效果的拐点
 
 - Silhouette Score
 
+	a = the mean distance between the instance and each other instance in the same cluster<br>
+	b = the mean distance from the instance to each instance in the nearest other cluster (i.e., excluding the cluster that the instance is assigned to)<br>
+	max(a,b) = whichever value is greater
+	
+	Silhouette coefficient = max(a,b)/(b−a)
+​
+	[-1，1]：越接近1说明观测点离自己的cluster成员越近，接近0，说明处于两个cluster中间，接近-1说明离自己的成员远而离另一个cluster更近。
+	
+	silhouette score = mean(Silhouette coefficient<sub>i</sub>)
+	
 - Silhouette analysis
+	
+	用不同的K值跑模型，得到silhouette score，<br>
+	画silhouette score与K的曲线plot，找到silhouette score最高的K值
+
+- Apply inertia and silhouette score with Python
+
+	略
 
 ## M4 Tree-based supervised learning
 
-- 
+### Tree-based modeling 决策树模型
+
+### Tune tree-based models 调试决策树
+
+### Bagging, Bootstrap aggregation 引导聚类算法/装袋算法
+
+### Boosting 提升方法
