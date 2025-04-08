@@ -105,7 +105,7 @@ data and models need to match each other
 
 ### A 分析 analyze
 
-	确定要预测是什么，以及什么样的样本数据结构可以支持接下来的建模分析步骤
+确定要预测是什么，以及什么样的样本数据结构可以支持接下来的建模分析步骤
 
 - Feature engineering 解决数据组成structure问题
 	
@@ -196,9 +196,11 @@ organize unlabeled data into groups or cluster 将无标签数据归类
 
 - K-means的优缺点
 	
-- another two clusting methodologies
-	- DBSCAN
-	- Agglomerative clustering	
+	在数据分布趋近圆形且比较均匀时表现较好，但是不能很好地反映密集程度，最后选择的中心点不一定是数据最密集的地方。
+	
+	- 如果想找到最密集点，可以用DBSCAN方法
+	- 或者用Agglomerative clustering，但这种方法必须规定K值或者cluster间距，否则会迭代到每个点一个分类才能停下。
+	- [Scikit-learn内建的聚类算法们](https://www.coursera.org/learn/the-nuts-and-bolts-of-machine-learning/supplement/yynh1/clustering-beyond-k-means "reading materials 页面最后")
 
 ### K-means Evaluation Metrics
 
