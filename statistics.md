@@ -113,11 +113,82 @@ Probability uses math to quantify uncertainty, or to describe the likelihood of 
 	- Poisson 泊松分布 models the probability that a certain number of events will occur during a specific time period
 	
 - Continuous distributions
+	
+	continuous probability distributions represent continuous random variables, which can take on all the possible values in a range of numbers.
+	
+	- Normal distribution/Gaussian distribution 正态分布/高斯分布
+		
+		The normal distribution is a continuous probability distribution that is symmetric about the mean and bell-shaped. It is also known as the Gaussian distribution
 
+	- All normal distributions have the following features: 
+
+		The shape is a bell curve<br>
+		The mean is located at the center of the curve<br>
+		The curve is symmetrical on both sides of the mean<br>
+		The total area under the curve equals 1
+	
+	- Empirical rule 经验法则/3σ/68-05-99.7法则
+		
+		1σ-68% of values fall within 1 standard deviation of the mean<br>
+		2σ-95% of values fall within 2 standard deviations of the mean<br>
+		3σ-99.7% of values fall within 3 standard deviations of the mean
+		
+- Probability Density and Probability 
+	
+	A probability function is a mathematical function that provides probabilities for the possible outcomes of a random variable. 
+
+	There are two types of probability functions: 
+
+	- Probability Mass Functions (PMFs) represent discrete random variables
+	- Probability Density Functions (PDFs) represent continuous random variables 
+	
 ### Probability distributions with python
 
 ## M3 Sampling
+### Sampling process
+1. Identify the target population
+2. Select the sampling frame
+3. Choose the sampling method
+4. Determine the sample size 
+5. Collect the sample data
+### Sampling methods
+- Probability sampling, uses random selection to generate a sample
+	- Simple random sampling
+	- Stratified random sampling
+	- Cluster random sampling
+	- Systematic random sampling
+- Non-probability sampling is often based on convenience
+	- Convenience sampling
+	- Voluntary response sampling
+	- Snowball sampling
+	- Purposive sampling
+### Sampling distributions
+- Central limit theorem 
 
+	The sampling distribution of the mean approaches a normal distribution as the sample size increases. And, as you sample more observations from a population, the sample mean gets closer to the population mean. 
+
+- Conditions
+	- Randomization
+		
+		Your sample data must be the result of random selection. Random selection means that every member in the population has an equal chance of being chosen for the sample.
+
+	- Independence
+		
+		Your sample values must be independent of each other. Independence means that the value of one observation does not affect the value of another observation. Typically, if you know that the individuals or items in your dataset were selected randomly, you can also assume independence.
+
+		- 10%: To help ensure that the condition of independence is met, your sample size should be no larger than 10% of the total population when the sample is drawn without replacement (which is usually the case). 
+
+	- Sample size: The sample size needs to be sufficiently large.
+
+	In general, many statisticians and data professionals consider a sample size of 30 to be sufficient when the population distribution is roughly bell-shaped, or approximately normal. However,  if the original population is not normal—for example, if it’s extremely skewed or has lots of outliers—data professionals often prefer the sample size to be a bit larger. Exploratory data analysis can help you determine how large of a sample is necessary for a given dataset. 
+	
+- Sampling distribution of the sample mean
+
+- Standard error, the standard deviation of a sample statistic
+	- standard error of the sample mean for a single sample
+		
+		s / √n. In the formula, s refers to the sample standard deviation, and n refers to the sample size.
+	 
 ## M4 Confidence intervals
 
 ## M5 Introduction to hypothesis testing
