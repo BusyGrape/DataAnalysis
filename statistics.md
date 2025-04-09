@@ -9,6 +9,7 @@
 ### Descriptive Statistics 描述性统计
 
 Describe or summarize the main features of a dataset
+描述或总结一组数据的特征
 
 - Measures of central tendancy 集中趋势度量
 	- mean 中位数
@@ -27,9 +28,16 @@ Describe or summarize the main features of a dataset
 	
 ### Inferential Statistics 推断性统计
 
+Make inferences about a dataset based on a sample of the data
+由样本推断整体
 
 - parameter and statistic in inferential statistics
+	- Parameter is a characteristic of a <b>population</b>
+	- Statistic is a characteristic of a sample
+	
 - population and sample in inferential statistics
+	sample is subset of population
+	
 - difference between descriptive statistics and inferential statistics
 
 ## M2 Probablity
