@@ -318,7 +318,7 @@ often used for A/B testing
 		- State the H<sub>0</sub> & H<sub>1</sub> 
 		- Choose a significance level
 		- Find the p-value
-			t = (x1-x2)/(√(s<sup>2</sup>/n)<sub>1</sub>+s<sup2</sup>/n)<sub>2</sub>)
+			t = (x1-x2)/(√(s<sup>2</sup>/n)<sub>1</sub>+s<sup>2</sup>/n)<sub>2</sub>)
 		- Reject or fail to reject H<sub>0</sub>
 - z-test
 	used for known SD of population and proportion two-sample test
