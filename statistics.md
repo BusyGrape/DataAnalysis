@@ -145,23 +145,29 @@ Probability uses math to quantify uncertainty, or to describe the likelihood of 
 ### Probability distributions with python
 
 ## M3 Sampling
+
 ### Sampling process
-1. Identify the target population
-2. Select the sampling frame
-3. Choose the sampling method
+
+1. Identify the target population 根据要分析的事情选择有用的特征界定数据范围
+2. Select the sampling frame 选择一种抽样的依据，比如用名字/用序号抽样
+3. Choose the sampling method 
 4. Determine the sample size 
 5. Collect the sample data
+
 ### Sampling methods
+
 - Probability sampling, uses random selection to generate a sample
-	- Simple random sampling
-	- Stratified random sampling
-	- Cluster random sampling
-	- Systematic random sampling
+	- Simple random sampling 直接从整体里随机抽样
+	- Stratified random sampling 分层抽样 先给整体进行分组，再从每个分组里随机抽样
+	- Cluster random sampling 整群抽样 给整体分组，然后随机选一组作为样本
+	- Systematic random sampling 等距抽样 给整体排序，然后随机选一个起始点和间隔长度取样
+	
 - Non-probability sampling is often based on convenience
 	- Convenience sampling
 	- Voluntary response sampling
-	- Snowball sampling
+	- Snowball sampling 滚雪球抽样 随机选则被访问者，再由他们提供其他调研对象
 	- Purposive sampling
+	
 ### Sampling distributions
 - Central limit theorem 
 
@@ -187,8 +193,53 @@ Probability uses math to quantify uncertainty, or to describe the likelihood of 
 - Standard error, the standard deviation of a sample statistic
 	- standard error of the sample mean for a single sample
 		
-		s / √n. In the formula, s refers to the sample standard deviation, and n refers to the sample size.
+		standard error = s / √n
+		
+		s refers to the sample standard deviation(σ)<br>
+		n refers to the sample size.
+
+### Sampling distributions with Python
 	 
 ## M4 Confidence intervals
+
+### Describe uncertainty of estimate
+- Confidence interval(Frequentist)置信区间（频率学派）
+
+	A range of values that describes the uncertainty surrounding an estimate
+
+	Example: 95 CI [28, 32]	
+	- Sample statistic, mean/median/mode
+	- Margin of error = z-score*standard error
+	- Confidence level 90%/<b>95%</b>/99%
+	- 9x CI [Sample statistic +- Margin of error]
+	
+- Credible interval(Bayesian)贝叶斯置信区间
+
+- Interpret confidence intervals
+
+	Technically, 95% confidence means that if you take repeated random samples from a population, and construct a confidence interval for each sample using the same method, you can expect that 95% of these intervals will capture the population mean. You can also expect that 5% of the total will not capture the population mean. 
+
+	- Misinterpretation 1: 95% refers to the probability that the population mean falls within the constructed interval
+	- Misinterpretation 2: 95% refers to the percentage of data values that fall within the interval
+	- Misinterpretation 3: 95% refers to the percentage of sample means that fall within the interval
+	
+### Constructing confidence intervals
+1. Identify a sample statistic. 
+2. Choose a confidence level. 
+3. Find the margin of error. 
+	z-score for large sample greater than 30
+	t-score for sample close to 30
+	n-score for sample smaller than 30
+	
+	standard error SE = SD / √n
+	standard error of proportion = √p(1-p)/n
+	
+	margin of error = x-score * SE
+	
+4. Calculate the interval.
+	Uper limit = sample statistic + margin of error
+	Lower limit = sample statistic - margin of error
+
+### Construct a confidence intervals with Python
 
 ## M5 Introduction to hypothesis testing
