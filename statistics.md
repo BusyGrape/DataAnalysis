@@ -1,4 +1,4 @@
-# The Power of Statistics
+# Statistics 统计学基础
 
 [Course link](https://www.coursera.org/learn/the-power-of-statistics/home/module/1"") 
 
