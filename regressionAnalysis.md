@@ -491,7 +491,7 @@ X<sub>i</sub>→X<sub>iA</sub>,X<sub>iB</sub>,...,X<sub>iN</sub><br>
 	
 	(还需要再仔细了解以上四种回归分析方法到底各自是做什么用的)
 
-## Logisic regression 逻辑回归
+## M5 Logisic regression 逻辑回归
 ### Foundations of logistic regression 逻辑回归基础
 - Binomial logistic regression 二元逻辑回归
 	
