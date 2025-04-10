@@ -195,7 +195,7 @@ Probability uses math to quantify uncertainty, or to describe the likelihood of 
 		
 		standard error = s / √n
 		
-		s refers to the sample standard deviation(σ)<br>
+		s refers to the sample standard deviation<br>
 		n refers to the sample size.
 
 ### Sampling distributions with Python
@@ -231,7 +231,7 @@ Probability uses math to quantify uncertainty, or to describe the likelihood of 
 	t-score for sample close to 30
 	n-score for sample smaller than 30
 	
-	standard error SE = SD / √n
+	standard error SE = σ<sup>*</sup> / √n (SD of population if known otherwise s the sample SD)
 	standard error of proportion = √p(1-p)/n
 	
 	margin of error = x-score * SE
@@ -243,3 +243,84 @@ Probability uses math to quantify uncertainty, or to describe the likelihood of 
 ### Construct a confidence intervals with Python
 
 ## M5 Introduction to hypothesis testing
+
+### Hypothesis testing
+A statistical procedure that uses sample data to evaluate an assumption about a population parameter
+
+- Statistical significance
+	The claim that the results of a test or experiment are not explainable by chance alone
+
+- Steps for performing a hypothesis test
+	1. State the null hypothesisand the alternative hypothesis
+	
+		null hypothesis H<sub>0</sub> 一般陈述样本的结果是随机产生的，“no effect,” “no difference,” “no relationship,” or “no change.”
+		
+		alternative hypothesis H<sub>1</sub> 一般陈述样本结果是由于什么情况产生的
+		
+	2. Choose a significance level 1%/<b>5%</b>/10%
+	
+		the probability of rejecting the H<sub>0</sub> when it is true
+		
+	3. Find the p-value
+		
+		H<sub>0</sub>出现的概率，包含比H<sub>0</sub>还要极端的情况出现的概率
+		
+	4. Reject or fail to reject the null hypothesis
+		
+		reject: p-value<significance level
+		
+		fail to reject: p-value>significance level
+
+- Types of errors in hypothesis testing
+	- Type I error (false positive)
+		想降低Type I error，降低significance level
+		
+	- Type II error (false negative)
+		想降低Type II error，提高significance level
+	
+### One-sample tests
+
+Determines whether or not a population parameter is equal to a specific value
+
+- z-test 
+	- assumptions
+		sample is from a normally distributed population
+		
+		SD of population is known
+		
+	- caculate z-score
+		how many σ away from mean your values lie on
+		
+		z=(x-μ)/(σ/√n)
+		
+		x=sample mean<br>
+		μ=population mean
+
+	- find out p-value
+
+- t-test
+
+### Two-sample tests
+
+Determines whether or not two population parameter are equal to each other
+
+often used for A/B testing
+
+- t-test
+	- assumptions
+		The two samples are independent of each other
+		
+		For each sample the data is drawn randomly from a normally distributed population
+		
+		The population standard deviation is unknown
+		
+	- Steps
+		- State the H<sub>0</sub> & H<sub>1</sub> 
+		- Choose a significance level
+		- Find the p-value
+			t = (x1-x2)/(√(s<sup>2</sup>/n)<sub>1</sub>+s<sup2</sup>/n)<sub>2</sub>)
+		- Reject or fail to reject H<sub>0</sub>
+- z-test
+	used for known SD of population and proportion two-sample test
+	
+### Hypothesis testing with Python
