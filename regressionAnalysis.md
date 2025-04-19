@@ -39,7 +39,7 @@ Y的归类是可以计数的，从两类到有限多类。
 μ{Y|X} = Prob(Y = n|X) = p
 
 - p，probability 当X是某个值的时候，Y属于第n种归类的可能性是多少。
-- link function 推算逻辑回归公示的方法
+- link function 推算逻辑回归公式的方法
 
 ### Correlation is not Causation 
 
