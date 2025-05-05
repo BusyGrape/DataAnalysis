@@ -21,3 +21,6 @@ End at Feb 22, 2025
 Start at Feb 22, 2025<br>
 Paused during March
 End at Apr 08 
+
+# Kaggle Competition Turtoriols
+[Study notes](/KaggleCourses.md "")
