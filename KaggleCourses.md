@@ -1,5 +1,7 @@
 # 时间序列Time Series
-如何分析和预测有时间序列的数据
+如何分析和预测有用时间或发生次序索引的数据。可以分析趋势Trend，周期性Seasonality，时序依赖性Serial Dependence。
+
+与非预测类型的算法结合使用Hybrid Models，让模型的预测兼具趋势展望和各类影响因素的反馈两重能力。
 
 ## 
 There are generally two ways a regression algorithm can make predictions: either by transforming the features or by transforming the target. 
