@@ -22,5 +22,8 @@ Start at Feb 22, 2025<br>
 Paused during March
 End at Apr 08 
 
-# Kaggle Competition Turtoriols
-[Study notes](/KaggleCourses.md "")
+# Kaggle Learn
+## Time Series
+[Study notes](/timeSeries.md "")
+
+Spent about 2 days.  May 05 2025
