@@ -26,4 +26,4 @@ End at Apr 08
 ## Time Series
 [Study notes](/timeSeries.md "")
 
-Spent about 2 days.  May 05 2025
+Spent about 2 days.  May 05, 2025
