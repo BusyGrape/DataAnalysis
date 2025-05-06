@@ -1,9 +1,16 @@
-# 时间序列Time Series
+# [时间序列Time Series](https://www.kaggle.com/learn/time-series "")
 如何分析和预测有用时间或发生次序索引的数据。可以分析趋势Trend，周期性Seasonality，时序依赖性Serial Dependence。
 
 与非预测类型的算法结合使用Hybrid Models，让模型的预测兼具趋势展望和各类影响因素的反馈两重能力。
 
 ## 趋势Trend
+```Python
+moving_average = df.rolling(
+    window=365,       # 365-day window
+    center=True,      # puts the average at the center of the window
+    min_periods=183,  # choose about half the window size
+).mean()              # compute the mean (could also do median, std, min, max, ...)
+```
 
 ## 周期性Seasonality
 
