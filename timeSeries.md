@@ -10,9 +10,15 @@ from statsmodels.tsa.deterministic import DeterministicProcess
 
 dp = DeterministicProcess(
      index=df.index,      # dates from the training data
+     drop=True,           # drop terms if necessary to avoid collinearity
+
+     # features for linear regression
      constant=True,       # dummy feature for the bias (y_intercept)
      order=1,             # 1 for linear, 2 for quadratic, 3 for cubic, and so on.
-     drop=True,           # drop terms if necessary to avoid collinearity
+
+     # fourier features, a two seasonal periods 
+     seasonal=True,               # weekly seasonality(indicators)
+     additional_terms=[fourier],  # annual seasonality(fourier)
 )
 ```
 ## 趋势Trend
@@ -67,7 +73,8 @@ _ = ax.legend()
 ```
 
 ## 周期性Seasonality
-周期性函数可以用若干组傅里叶曲线来表达。
+周期性函数可以用若干组傅里叶曲线来表达。为周期性函数建模，We will learn two kinds of features that model seasonality. The first kind, indicators, is best for a season with few observations, like a weekly season of daily observations. The second kind, Fourier features, is best for a season with many observations, like an annual season of daily observations.
+选择几组傅里叶曲线能够充分表达其周期性，是一个前置问题。periodogram得出结论。
 
 ```Python
 
