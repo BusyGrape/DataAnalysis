@@ -175,6 +175,7 @@ y_pred = y_pred_1 + y_pred_2
 
 ## Forecasting With Machine Learning
 [参考这篇知乎](https://zhuanlan.zhihu.com/p/542673840 "")
+
 时间窗Forecast Horizon：即我们要用多少时间步的历史数据，去预测多少个时间步的未来数据。
 提前量Lead Time：提前多少天预测。进行特征构建的时候，滞后特征要从n天前开始做起。
 
