@@ -189,3 +189,23 @@ y_pred = y_pred_1 + y_pred_2
 
 ### 迭代Recursive strategy
 训练1个模型，每次预测一步，再输入回模型，预测下一步。问题是误差会随着迭代累积。
+
+### 直接+迭代DirRec strategy
+看那篇知乎吧
+
+### 多输出模型包装器MultiOutputRegressor
+```Python
+# for direct strategy
+from sklearn.multioutput import MultiOutputRegressor
+
+model = MultiOutputRegressor(XGBRegressor())
+model.fit(X_train, y_train)
+
+y_fit = pd.DataFrame(model.predict(X_train), index=X_train.index, columns=y.columns)
+y_pred = pd.DataFrame(model.predict(X_test), index=X_test.index, columns=y.columns)
+
+# for DirRec strategy
+from sklearn.multioutput import RegressorChain
+
+model = RegressorChain(base_estimator=XGBRegressor())
+```
