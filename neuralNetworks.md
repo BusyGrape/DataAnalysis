@@ -32,6 +32,9 @@ flowchart LR
 
 Dense Layer：是线性模型层。
 
+为什么一层里要有多个神经元？
+[知乎回答一，同一层的不同神经元，是随机初始值，这样每个神经元的作用不会一样](https://www.zhihu.com/question/270100538 "")
+
 ### The Activation Function
 给层输出加上一个“调节器”。
 
@@ -87,6 +90,8 @@ history = model.fit(
     epochs=10,
 )
 ```
+
+loss function是在通过所有层以后才启动计算？
 
 ## Overfitting and Underfitting
 
