@@ -11,34 +11,44 @@ Objectives:
 一个神经元：一个线性模型
 ```mermaid
 flowchart LR
-    A("X") -- w --> B("\+")
+    A(("X")) -- w --> B(("\+"))
     B --> C["y"]
-    D("1") -- b --> B
+    D(("1")) -- b --> B
     C@{ shape: text}
-
-    style A stroke:#757575
-    style A fill:transparent
-    style B stroke:#000000
-    style B fill:transparent
-    style D stroke:#757575
-    style D fill:transparent
-
 ```
+
 ## Deep Neural Networks
 ### Layers
 层：一组线性模型/一组神经元，每个模型/神经元的输入都是一样的。
+```mermaid
+flowchart LR
+    X0(("X0")) --> D0(("\+"))
+    X1(("X1")) --> D0
+    1(("1")) --> D0
+    D0 --> O0["y0"]
+    X0 --> D1(("\+"))
+    X1 --> D1
+    1 --> D1
+    D1 --> O1["y1"]
+    O0@{ shape: text}
+    O1@{ shape: text}
+```
 
 不同种类的层可以采用不同的数据拟合方法。理论上说，我们可以采用任何算法/公式来考虑数据之间的关系。
 
-Dense Layer：是线性模型层。
+Dense Layer：是线性回归模型层。
 
-为什么一层里要有多个神经元？
-[知乎回答一，同一层的不同神经元，是随机初始值，这样每个神经元的作用不会一样](https://www.zhihu.com/question/270100538 "")
+> 为什么一层里要有多个神经元？
+> 
+> [知乎回答一，同一层的不同神经元，w b 是随机初始值，这样每个神经元的作用不会一样](https://www.zhihu.com/question/270100538 "")
+>
+> 如果只是做线性回归多个神经元没有太多意义，但是做非线性回归，加上激活公式，多个神经元的作用就比较明显
 
 ### The Activation Function
 给层输出加上一个“调节器”。
 
 ReLU，只输出大于0的结果，这样做，经过两个Dense Layer，可以拟合曲线。
+> [知乎一篇激活函数介绍](https://zhuanlan.zhihu.com/p/690650173 "")
 
 ### Python code
 ```python
@@ -57,6 +67,11 @@ model = keras.Sequential([
 ## Stochastic Gradient Descent
 ### The Loss Function
 线性回归，通常用平均误差绝对值法MAE，也可以用其他的比如MSE
+> 如何通过loss function调整下一次迭代的系数w b
+> 
+> [这个帖子的计算过程基本回答清楚了线性回归模型算法工作原理](https://juejin.cn/post/7480369529158746146 "")
+> 
+> [知乎文章，多个神经元，多个输入值，如何对应计算](https://zhuanlan.zhihu.com/p/690647602 "")
 
 ### Optimizer
 优化算法，找到让loss最小的weights。
@@ -91,7 +106,9 @@ history = model.fit(
 )
 ```
 
-loss function是在通过所有层以后才启动计算？
+> loss function是在通过所有层以后才启动计算？
+> 
+> [知乎文章似乎肯定了这个猜想](https://zhuanlan.zhihu.com/p/683866243 "")
 
 ## Overfitting and Underfitting
 
@@ -135,3 +152,37 @@ history_df = pd.DataFrame(history.history)
 history_df.loc[:, ['loss', 'val_loss']].plot();
 print("Minimum validation loss: {}".format(history_df['val_loss'].min()))
 ```
+
+## Dropout and Batch Normalization
+不包含任何神经元的层
+
+### Dropout
+随即扔掉一部分神经元，避免过度拟合/过度学习特征/overfit
+
+```python
+keras.Sequential([
+    # ...
+    layers.Dropout(rate=0.3), # apply 30% dropout to the next layer
+    layers.Dense(16),
+    # ...
+])
+```
+
+### Batch Normalization
+把输入数据按这部分数据的mean / std 进行放缩调整
+
+```python
+# 可以放在任意两层之间
+layers.Dense(16, activation='relu'),
+layers.BatchNormalization(),
+Layers.Dense(...)
+
+# 可以放在一层的神经元和其激活公式之间
+layers.Dense(16),
+layers.BatchNormalization(),
+layers.Activation('relu'),
+
+# 如果放在第一层，就跟Sci-Kit Learn's StandardScaler效果一样
+```
+
+## Binary Classification
