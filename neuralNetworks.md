@@ -49,6 +49,7 @@ Dense Layer：是线性回归模型层。
 
 ReLU，只输出大于0的结果，这样做，经过两个Dense Layer，可以拟合曲线。
 > [知乎一篇激活函数介绍](https://zhuanlan.zhihu.com/p/690650173 "")
+> <a href="https://github.com/BusyGrape/DataAnalysis/blob/main/links/简单理解神经网络中常用数学函数——激活函数.mhtml" target="_blank">右击另存网页</a>
 
 ### Python code
 ```python
@@ -70,9 +71,10 @@ model = keras.Sequential([
 > 如何通过loss function调整下一次迭代的系数w b
 > 
 > [这个帖子的计算过程基本回答清楚了线性回归模型算法工作原理](https://juejin.cn/post/7480369529158746146 "")
+> <a href="https://github.com/BusyGrape/DataAnalysis/blob/main/links/梯度计算.mhtml" target="_blank">右击另存网页</a>
 > 
 > [知乎文章，多个神经元，多个输入值，如何对应计算](https://zhuanlan.zhihu.com/p/690647602 "")
-> <a href="https://github.com/BusyGrape/DataAnalysis/blob/main/links/简单理解神经网络中常用数学函数——线性函数.mhtml" target="_blank">点击下载网页</a>
+> <a href="https://github.com/BusyGrape/DataAnalysis/blob/main/links/简单理解神经网络中常用数学函数——线性函数.mhtml" target="_blank">右击另存网页</a>
 
 ### Optimizer
 优化算法，找到让loss最小的weights。
@@ -110,6 +112,7 @@ history = model.fit(
 > loss function是在通过所有层以后才启动计算？
 > 
 > [知乎文章似乎肯定了这个猜想](https://zhuanlan.zhihu.com/p/683866243 "")
+> <a href="https://github.com/BusyGrape/DataAnalysis/blob/main/links/神经网络基础内容.mhtml" target="_blank">右击另存网页</a>
 
 ## Overfitting and Underfitting
 
