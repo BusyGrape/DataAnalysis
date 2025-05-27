@@ -72,6 +72,7 @@ model = keras.Sequential([
 > [这个帖子的计算过程基本回答清楚了线性回归模型算法工作原理](https://juejin.cn/post/7480369529158746146 "")
 > 
 > [知乎文章，多个神经元，多个输入值，如何对应计算](https://zhuanlan.zhihu.com/p/690647602 "")
+> [网页快照-简单理解神经网络中常用数学函数——线性函数](/links/简单理解神经网络中常用数学函数——线性函数.mhtml "")
 
 ### Optimizer
 优化算法，找到让loss最小的weights。
