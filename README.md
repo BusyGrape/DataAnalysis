@@ -27,3 +27,10 @@ End at Apr 08
 [Study notes](/timeSeries.md "")
 
 Spent about 2 days.  May 05, 2025
+
+## Neural Networks
+[Study notes](/neuralNetworks.md "")
+
+Part1: Spent 1 week.  May 22, 2025
+
+Part2: Start at May 28, 2025--End at
