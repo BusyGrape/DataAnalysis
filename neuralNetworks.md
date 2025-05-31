@@ -216,3 +216,75 @@ model = keras.Sequential([
     layers.Dense(1, activation='sigmoid'),
 ])
 ```
+
+# The Convolutional Classifier
+卷积分类器
+objectives:
+- Use modern deep-learning networks to build an image classifier with Keras
+- Design your own custom convnet with reusable blocks
+- Learn the fundamental ideas behind visual feature extraction
+- Master the art of transfer learning to boost your models
+- Utilize data augmentation to extend your dataset
+
+## Computer Vision
+### The Convolutional Classifier
+- convolutional base
+  
+  base 用于提取特征 extract the features <br>
+  做卷积运算convolution operation，也使用其他layer类型
+  
+- dense head
+  
+  head 用来决定分类 determine the class <br>
+  一般使用dense layer做分类运算。但偶尔也加入其他类型的层，比如dropout layer
+
+- visual feature 视觉特征
+
+  feature包含，线条line、颜色color、纹理pattern，形状shape，材质texture等
+  
+### Training the Classifier
+
+现在的模型训练很少从0开始做，一般是使用其他模型的base。直接进入训练分类的步骤。这种训练方式又叫transfer learning
+
+- reuse the base of a pretrained model
+
+	```python
+	import tensorflow as tf
+
+	pretrained_base = tf.keras.models.load_model(
+		'../input/cv-course-models/cv-course-models/vgg16-pretrained-base',
+	)
+	pretrained_base.trainable = False
+	```
+
+- attach an untrained head
+
+	```python
+	from tensorflow import keras
+	from tensorflow.keras import layers
+
+	model = keras.Sequential([
+		pretrained_base,
+		layers.Flatten(),
+		layers.Dense(6, activation='relu'),
+		layers.Dense(1, activation='sigmoid'),
+	])
+	```
+
+- to learn classify
+
+	```python
+	model.compile(
+		optimizer='adam',
+		loss='binary_crossentropy',
+		metrics=['binary_accuracy'],
+	)
+
+	history = model.fit(
+		ds_train,
+		validation_data=ds_valid,
+		epochs=30,
+		verbose=0,
+	)
+	```
+## 
