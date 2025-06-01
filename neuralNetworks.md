@@ -181,7 +181,7 @@ keras.Sequential([
 # 可以放在任意两层之间
 layers.Dense(16, activation='relu'),
 layers.BatchNormalization(),
-Layers.Dense(...)
+layers.Dense(...)
 
 # 可以放在一层的神经元和其激活公式之间
 layers.Dense(16),
@@ -388,3 +388,49 @@ model = keras.Sequential([
 **练习簿最后一段代码，可以反复run，看不同图片提取出的global feature。嗯，一言难尽，我相信人脑神经不是这么区分图片的。**
 
 ## The Sliding Window
+convolution 和 pooling 都要面临滑动窗口问题。图像经过kernel/pooling（统称为window窗口）以后，因为是由n*n像素计算出一个结果，输出层的像素必然会减少一些。另外窗口的挪动也可以不是一格一格的，所以移动步长也不是一个绝对值。
+
+所以这两个层都需要设定strides（步长）和padding（扩展边缘）参数。
+
+```python
+from tensorflow import keras
+from tensorflow.keras import layers
+
+model = keras.Sequential([
+    layers.Conv2D(filters=64,
+                  kernel_size=3,
+                  strides=1,
+                  padding='same',
+                  activation='relu'),
+    layers.MaxPool2D(pool_size=2,
+                     strides=1,
+                     padding='same')
+    # More layers follow
+])
+```
+
+### Strides
+
+步长大于1，意味着学习时将跳过一些像素。为了提高学习的准确率，一般不建议跳步。
+
+步长最长不能超过窗口的边长
+
+如果步长各个维度值相等，可以不用写成矩阵，直接简化输入一个数字。
+
+### Padding
+
+如果窗口只在图片内移动，边界上的像素得到的处理会和中间像素不同。Tensorflow有两种不同的弥补方式
+
+- padding='same'
+	
+	在边缘外面补一圈或几圈0，保证输出和输入尺寸一致。
+	
+	但是也不能算是正确解释边界上的像素，被0像素稀释了一部分特征。
+
+- padding='valid'
+	
+	就留在图像内部，输出层会有一定的缩水，窗口越大缩水越多。
+	
+	因为输出逐步缩水，所以会限制神经网络的深度。尤其在输入图像像素不足的情况况下。
+	
+	
