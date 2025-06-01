@@ -309,9 +309,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 
 model = keras.Sequential([
-    layers.Conv2D(filters=64, 
-	              kernel_size=3
-				  ), # activation is None
+    layers.Conv2D(filters=64, kernel_size=3), # activation is None
     # More layers follow
 ])
 ```
@@ -328,6 +326,6 @@ model = keras.Sequential([
 	卷积核的数量/想要产生多少个feature maps
 
 - 为什么要多个kernal/filter？
-	多个filter<u>s</u> 和 多个unit<u>s</u> 是不是作用类似
+	多个filter <u>s</u> 和 多个unit <u>s</u> 是不是作用类似
 
 ### Detect with ReLU
