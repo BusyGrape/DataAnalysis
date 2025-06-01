@@ -119,7 +119,7 @@ history = model.fit(
 ### Capacity
 A model's capacity refers to the size and complexity of the patterns it is able to learn. For neural networks, this will largely be determined by how many neurons it has and how they are connected together. 
 
-underfit了，要么加神经元数量，要么加层数
+underfit了，要么加神经元数量unites，要么加层数layers
 
 ### Early Stopping
 为了防止overfit，在构建模型前，先定义叫停标准
@@ -293,7 +293,7 @@ objectives:
 ## Convolution and ReLU
 
 Two most important types of layers in the **base**:<br>
-*convolutional layer with ReLU activation*, and the maximum pooling layer
+**<u>convolutional layer with ReLU activation</u>**, and the maximum pooling layer
 
 ### Feature Extraction
 
@@ -328,6 +328,6 @@ model = keras.Sequential([
 	卷积核的数量/想要产生多少个feature maps
 
 - 为什么要多个kernal/filter？
-	多个filter*s* 和 多个unit*s* 是不是作用类似
+	多个filter<u>s</u> 和 多个unit<u>s</u> 是不是作用类似
 
 ### Detect with ReLU
