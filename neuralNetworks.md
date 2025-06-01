@@ -1,3 +1,4 @@
+[TensorFlow Guide](https://www.kaggle.com/learn-guide/tensorflow "to Kaggle") courses link
 TensorFlow is a library for developing and training machine learning models. Keras is an API built on top of TensorFlow designed for neural networks and deep learning.
 
 # Intro to Deep Learning
@@ -7,7 +8,7 @@ Objectives:
 - train neural nets with stochastic gradient descent, and
 - improve performance with dropout, batch normalization, and other techniques
 
-## A Single Neuron(unit)
+## A Single Neuron (A Unit)
 一个神经元：一个线性模型
 ```mermaid
 flowchart LR
@@ -218,7 +219,8 @@ model = keras.Sequential([
 ```
 
 # The Convolutional Classifier
-卷积分类器
+卷积分类
+
 objectives:
 - Use modern deep-learning networks to build an image classifier with Keras
 - Design your own custom convnet with reusable blocks
@@ -277,23 +279,13 @@ objectives:
 - to learn classify
 
 	```python
-	model.compile(
-		optimizer='adam',
-		loss='binary_crossentropy',
-		metrics=['binary_accuracy'],
-	)
-
-	history = model.fit(
-		ds_train,
-		validation_data=ds_valid,
-		epochs=30,
-		verbose=0,
-	)
+	# model.compile = Binary Classification
+    # model.fit = Training code
 	```
 ## Convolution and ReLU
 
 Two most important types of layers in the **base**:<br>
-**<convolutional layer with ReLU activation**, and the maximum pooling layer
+**convolutional layer with ReLU activation**, and the maximum pooling layer
 
 ### Feature Extraction
 
@@ -326,6 +318,23 @@ model = keras.Sequential([
 	卷积核的数量/想要产生多少个feature maps
 
 - 为什么要多个kernal/filter？
-	多个filters 和 多个units 是不是作用类似
+	
+	多个filters 和 多个units 是不是作用类似：
+	
+    以下摘抄自[《动手学深度学习》](https://zh.d2l.ai/index.html "")<br>	图像一般包含三个通道/三种原色（红色、绿色和蓝色）。这些通道有时也被称为特征映射（feature maps），因为每个通道都向后续层提供一组空间化的学习特征。 
+	直观上可以想象在靠近输入的底层，一些通道专门识别边缘，而一些通道专门识别纹理。直观地说，我们可以将每个通道看作对不同特征的响应。
+	在最流行的神经网络架构中，随着神经网络层数的加深，我们常会增加输出通道的维数，通过减少空间分辨率以获得更大的通道深度。
+	
+	unit用来学习曲线不同分段的特征（斜率/梯度/曲率），kernel用来学习识别不同的图像特征（线条/形状/纹理等）。
 
 ### Detect with ReLU
+```pyton
+model = keras.Sequential([
+    layers.Conv2D(filters=64, kernel_size=3, activation='relu')
+    # More layers follow
+])
+```
+
+ReLU激活层的作用是把不重要的像素点全设为0
+
+## Maximum Pooling
