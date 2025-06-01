@@ -1,4 +1,5 @@
 [TensorFlow Guide](https://www.kaggle.com/learn-guide/tensorflow "to Kaggle") courses link
+
 TensorFlow is a library for developing and training machine learning models. Keras is an API built on top of TensorFlow designed for neural networks and deep learning.
 
 # Intro to Deep Learning
@@ -284,14 +285,16 @@ objectives:
 	```
 ## Convolution and ReLU
 
+虽然实际应用中我们基本不重新训练base部分，但还是学习一下base是怎么工作的。
+
 Two most important types of layers in the **base**:<br>
 **convolutional layer with ReLU activation**, and the maximum pooling layer
 
 ### Feature Extraction
 
 特征提取，通过三个基本计算来实现：
-- Filter 筛选特定的特征值（Convolution）
-- Detect 检测或者激活该特征（ReLU）
+- Filter 筛选提取特征（Convolution）
+- Detect 将不属于被提取特征的归零（ReLU）
 - Condense 浓缩加强特征（maximum pooling）
 
 ### Filter with Convolution
@@ -338,3 +341,50 @@ model = keras.Sequential([
 ReLU激活层的作用是把不重要的像素点全设为0
 
 ## Maximum Pooling
+**condense** with a MaxPool2D layer
+
+### Coding
+
+这个层本身就是一个加强公式。没有需要调教的weights，只有pool_size作用类似于kernel_size
+
+```python
+from tensorflow import keras
+from tensorflow.keras import layers
+
+model = keras.Sequential([
+    # layers.Conv2D
+    layers.MaxPool2D(pool_size=2),
+    # More layers follow
+])
+```
+
+经过这个层以后，在pool_size范围内，特征像素，会被扩大填充到0值像素里。从而达到强化被提取的特征的目的。
+
+### Translation Invariance
+平移不变性。当所需要识别的目标出现在图像的不同位置时，模型对其识别所得到的标签应该相同。
+
+We called the zero-pixels "unimportant". ReLU层会将所有不重要的像素归零。但是这些不重要的像素也携带着信息——位置信息。如果不断放大特征（降低分辨率），位置信息将逐渐被移除。
+
+这样的处理会让feature map只记录下局部图片的特征，而忽略这个局部在整个图像中的位置。
+
+### Global Average Pooling
+
+```python
+# import libaries
+
+model = keras.Sequential([
+    pretrained_base,
+    layers.GlobalAvgPool2D(),
+    layers.Dense(1, activation='sigmoid'),
+])
+```
+
+用了global layer以后，省略了flatten layer和dense layer。
+它是head部分中的另一种结构。
+
+他与flatten 1D展开逻辑不一样。它是直接将feature map求一个平均值，降成0维？。虽然简单粗暴，但通常表现也挺好。
+
+[Exercise Jupiter Book](https://www.kaggle.com/kernels/fork/11989559 "")
+**练习簿最后一段代码，可以反复run，看不同图片提取出的global feature。嗯，一言难尽，我相信人脑神经不是这么区分图片的。**
+
+## The Sliding Window
