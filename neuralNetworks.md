@@ -7,7 +7,7 @@ Objectives:
 - train neural nets with stochastic gradient descent, and
 - improve performance with dropout, batch normalization, and other techniques
 
-## A Single Neuron
+## A Single Neuron(unit)
 一个神经元：一个线性模型
 ```mermaid
 flowchart LR
@@ -228,6 +228,9 @@ objectives:
 
 ## Computer Vision
 ### The Convolutional Classifier
+
+卷积图像分类，由两部分组成 convolutional **base** & dense **head**
+
 - convolutional base
   
   base 用于提取特征 extract the features <br>
@@ -244,7 +247,7 @@ objectives:
   
 ### Training the Classifier
 
-现在的模型训练很少从0开始做，一般是使用其他模型的base。直接进入训练分类的步骤。这种训练方式又叫transfer learning
+现在的模型训练很少从0开始做，一般是使用其他模型的base。直接进入训练分类的步骤。这种训练方式又叫迁移学习transfer learning
 
 - reuse the base of a pretrained model
 
@@ -287,4 +290,44 @@ objectives:
 		verbose=0,
 	)
 	```
-## 
+## Convolution and ReLU
+
+Two most important types of layers in the **base**:<br>
+*convolutional layer with ReLU activation*, and the maximum pooling layer
+
+### Feature Extraction
+
+特征提取，通过三个基本计算来实现：
+- Filter 筛选特定的特征值（Convolution）
+- Detect 检测或者激活该特征（ReLU）
+- Condense 浓缩加强特征（maximum pooling）
+
+### Filter with Convolution
+
+```python
+from tensorflow import keras
+from tensorflow.keras import layers
+
+model = keras.Sequential([
+    layers.Conv2D(filters=64, 
+	              kernel_size=3
+				  ), # activation is None
+    # More layers follow
+])
+```
+
+- Weights 系数，是kernels 核函数 矩阵里的各个位置上的值
+	
+	kernel_size= <br>
+	核函数矩阵的形状。一般是(3,3) (5,5) 这种奇数有一个确定中心点的矩阵。但也可以是偶数或者其他形状的矩阵(1,2)
+	
+- Activations 是输入图像被过滤后的数据（被核函数提取出来的特征）feature maps
+	
+	filters= <br>
+	每个输入通过一个kernel会产生一个feature map，有N个kernel就会产生N个featrue maps。<br>
+	卷积核的数量/想要产生多少个feature maps
+
+- 为什么要多个kernal/filter？
+	多个filter*s* 和 多个unit*s* 是不是作用类似
+
+### Detect with ReLU
