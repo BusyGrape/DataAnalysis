@@ -293,7 +293,7 @@ objectives:
 ## Convolution and ReLU
 
 Two most important types of layers in the **base**:<br>
-**<u>convolutional layer with ReLU activation</u>**, and the maximum pooling layer
+**<convolutional layer with ReLU activation**, and the maximum pooling layer
 
 ### Feature Extraction
 
@@ -326,6 +326,6 @@ model = keras.Sequential([
 	卷积核的数量/想要产生多少个feature maps
 
 - 为什么要多个kernal/filter？
-	多个filter <u>s</u> 和 多个unit <u>s</u> 是不是作用类似
+	多个filters 和 多个units 是不是作用类似
 
 ### Detect with ReLU
