@@ -432,5 +432,56 @@ model = keras.Sequential([
 	就留在图像内部，输出层会有一定的缩水，窗口越大缩水越多。
 	
 	因为输出逐步缩水，所以会限制神经网络的深度。尤其在输入图像像素不足的情况况下。
+
+### 维度
+
+Conv2D处理二维数据，如平面图<br>
+Conv1D可以处理一维数据，如时间序列分析<br>
+Conv3D...
+
+要对应使用pooling层：MaxPool2D/1D/3D
 	
-	
+## Custom Convnets
+
+### Convolutional Blocks
+
+一个块block由 三个步骤operation（filter，detect，condense）/三种层layer（convolution，RELU，pooling）构成
+
+一个块代表一轮round特征提取
+
+## Data Augmentation
+
+提升机器学习能力的方式之一是给它更多的数据用来学习。如果没有新数据呢？我们可以伪造一些“新”数据。对图片做一些手脚，比如反转图片，让车头朝向反方向。由于图片识别车的类型时，应该忽略车头朝向，所以我们创造了一种有价值的的伪新数据。
+
+但是要注意，如果训练数字，颠倒6和9会直接导致数据分类标注错误。
+
+没有一条绝对标准，你要多次尝试什么样的fake手段最合适。
+
+- ImageDataGeneraotr 
+- preprocessiong layers
+	我们喜欢则换个方式，因为它使用GPU
+
+```Python
+from tensorflow import keras
+from tensorflow.keras import layers
+# these are a new feature in TF 2.2
+from tensorflow.keras.layers.experimental import preprocessing
+
+
+pretrained_base = tf.keras.models.load_model(
+    '../input/cv-course-models/cv-course-models/vgg16-pretrained-base',
+)
+pretrained_base.trainable = False
+
+model = keras.Sequential([
+    # Preprocessing
+    preprocessing.RandomFlip('horizontal'), # flip left-to-right
+    preprocessing.RandomContrast(0.5), # contrast change by up to 50%
+    # Base
+    pretrained_base,
+    # Head
+    layers.Flatten(),
+    layers.Dense(6, activation='relu'),
+    layers.Dense(1, activation='sigmoid'),
+])
+```
