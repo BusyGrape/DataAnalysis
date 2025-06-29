@@ -33,4 +33,15 @@ Spent about 2 days.  May 05, 2025
 
 Part1: Spent 1 week.  May 22, 2025
 
-Part2: Start at May 28, 2025--End at
+Part2: Start at May 28, 2025--End at Jun 17, 2025
+
+Bonus Lessons:
+
+## Natual language processing (NLP)
+[Study notes](/ "")
+
+- Getting started with NLP for absolute beginners
+  
+  Start at Jun 17, 2025--End at 
+
+- 
