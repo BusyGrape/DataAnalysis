@@ -45,3 +45,15 @@ Bonus Lessons:
   Start at Jun 17, 2025--End at 
 
 - 
+
+## 5-Day Gen AI Intensive Course with Google
+Briefly read whitepapers in July 2025
+
+# Dive Into Deep Learning 动手学深度学习
+Mu Li 李沐 
+[d2l Website](https://zh.d2l.ai/ "中文版")
+
+Use this web(course materials) as technical referense
+
+Finished at 
+
