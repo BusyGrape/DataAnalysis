@@ -47,7 +47,8 @@ Bonus Lessons:
 - 
 
 ## 5-Day Gen AI Intensive Course with Google
-Briefly read whitepapers in July 2025
+Briefly read whitepapers from this 5-day course in July 2025
+
 
 # Dive Into Deep Learning 动手学深度学习
 Mu Li 李沐 
