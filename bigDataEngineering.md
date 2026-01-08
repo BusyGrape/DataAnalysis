@@ -95,6 +95,9 @@ RDD本身是没有dataframe的。
 
 我理解它可以提供基于类似Hadoop和/或Spark两种大数据存储和计算方案。但是不需要用户特别了解这两套大数据服务的部署。
 
+Snowflake的收费是基于warehouse的使用（大概是消耗的算力）。
+
+
 ## Big Data Storage
 - Shared Everything
 - Shared Disk
@@ -105,6 +108,8 @@ Snowflake混合用shared disk和shared nothing
 ## Database Storage
 
 存在Snowflake的data，文件存储结构用户不可知，由snowflake来决定如何分散、备份和优化。
+
+>>感觉操作Snowflake就像是在操作一个没有成型的前台界面和固定工作流程的数据库软件部署。包括建立数据库结构，使用者权限，数据抓取汇总公式。。。
 
 ## Query Processing
 
@@ -118,3 +123,12 @@ Snowflake混合用shared disk和shared nothing
 只能在公共云平台，不能是私有云。
 
 网页界面，编程界面，提供ODBC/JDBC接口，python/spark等程序接口，分析工具直连接口。
+
+## Snowsight
+
+Snowsight is a tool built on top of Snowflake to facilitate data exploration, visualization, and collaboration
+
+
+# Databricks
+
+用spark处理数据运算，用Azure建立数据工作流程的平台。主要针对大数据，和机器学习。
