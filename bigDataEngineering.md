@@ -114,7 +114,9 @@ Snowsight is a tool built on top of Snowflake to facilitate data exploration, vi
 
 
 # Databricks
-用spark处理数据运算，用Azure建立数据工作流程的平台。主要针对大数据，和机器学习。
+用spark处理数据运算，用Azure建立数据工作流程的平台。
+主要针对大数据处理，和机器学习，有专门服务ML开发实验的工具包，组件，界面。
+可以理解是想模仿GitHub打造一个ML的开源共享开发模型的工具加平台加社区的怪物。而且是付费加入免费开源互助服务队伍。
 
 ## Spark Notebooks
 内置Databrick的编辑器，类似于Jupyter吧，或者就是。

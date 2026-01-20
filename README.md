@@ -61,5 +61,6 @@ Finished at
 
 # Spark, Hadoop, and Snowflake for Data Engineering 大数据工具和平台
 [Study notes](/bigDataEngineering.md "")
+2025某天-2026.1.20
 
-2025-2026.1.20
+存储结构，多线程计算实现，RDD概念都没有特别详细的展开讲。所以这部分有待找其他学习资料。
