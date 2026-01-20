@@ -58,3 +58,8 @@ Use this web(course materials) as technical referense
 
 Finished at 
 
+
+# Spark, Hadoop, and Snowflake for Data Engineering 大数据工具和平台
+[Study notes](/bigDataEngineering.md "")
+
+2025-2026.1.20
